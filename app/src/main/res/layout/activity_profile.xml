@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAD9C6"
+    tools:context=".Profile">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Профиль"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="94dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:src="@drawable/avatar"
+        app:layout_constraintEnd_toStartOf="@id/layoutNameAge"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <LinearLayout
+        android:id="@+id/layoutNameAge"
+        android:layout_width="285dp"
+        android:layout_height="106dp"
+        android:background="#E3BCA3"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgAvatar"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Кличка" />
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Возраст" />
+    </LinearLayout>
+
+    <!-- Порода -->
+
+    <TextView
+        android:id="@+id/Breed"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="#E3BCA3"
+        android:text="Порода:"
+        android:textSize="18sp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutNameAge" />
+
+    <EditText
+        android:id="@+id/etBreed"
+        android:layout_width="307dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:hint="введите"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/Breed"
+        app:layout_constraintTop_toBottomOf="@id/layoutNameAge" />
+
+    <!-- Рождение -->
+    <TextView
+        android:id="@+id/BirthData"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="#E3BCA3"
+        android:padding="8dp"
+        android:text="Дата рождения:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Breed" />
+
+    <EditText
+        android:id="@+id/etBirthDate"
+        android:layout_width="238dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="2dp"
+        android:hint="введите"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/BirthData"
+        app:layout_constraintEnd_toEndOf="@+id/Breed"
+        app:layout_constraintTop_toBottomOf="@id/Breed" />
+
+    <!-- Пол -->
+    <TextView
+        android:id="@+id/Sex"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="#E3BCA3"
+        android:text="Пол:"
+        android:textSize="18sp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/BirthData" />
+
+    <EditText
+        android:id="@+id/etSex"
+        android:layout_width="337dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:hint="введите"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Sex"
+        app:layout_constraintEnd_toEndOf="@+id/BirthData"
+        app:layout_constraintTop_toBottomOf="@id/BirthData" />
+
+    <!-- Клеймо -->
+    <TextView
+        android:id="@+id/Mark"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="#E3BCA3"
+        android:text="Клеймо:"
+        android:textSize="18sp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Sex" />
+
+    <EditText
+        android:id="@+id/etMark"
+        android:layout_width="305dp"
+        android:layout_height="40dp"
+        android:hint="введите"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Mark"
+        app:layout_constraintEnd_toEndOf="@+id/Mark"
+        app:layout_constraintTop_toTopOf="@+id/Mark" />
+
+    <!-- Вес (текущий) -->
+    <TextView
+        android:id="@+id/Weight"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="#E3BCA3"
+        android:text="Вес:"
+        android:textSize="18sp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Mark" />
+
+    <EditText
+        android:id="@+id/etWeight"
+        android:layout_width="337dp"
+        android:layout_height="40dp"
+        android:hint="введите"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Weight"
+        app:layout_constraintEnd_toEndOf="@+id/Weight"
+        app:layout_constraintTop_toTopOf="@+id/Weight" />
+
+    <!-- Кнопка история веса -->
+    <Button
+        android:id="@+id/btnWeightHistory"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/brown"
+        android:text="История данных"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Weight" />
+
+    <!-- Рост (текущий) -->
+    <TextView
+        android:id="@+id/Height"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="#E3BCA3"
+        android:text="Рост:"
+        android:textSize="18sp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnWeightHistory" />
+
+    <EditText
+        android:id="@+id/etHeight"
+        android:layout_width="328dp"
+        android:layout_height="40dp"
+        android:hint="введите"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Height"
+        app:layout_constraintEnd_toEndOf="@+id/Height"
+        app:layout_constraintTop_toTopOf="@+id/Height" />
+
+    <!-- Кнопка история роста -->
+    <Button
+        android:id="@+id/btnHeightHistory"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/brown"
+        android:text="История данных"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Height" />
+
+    <!-- Кнопка добавить параметр -->
+    <Button
+        android:id="@+id/btnAddParam"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/light_brown"
+        android:text="Добавить параметр"
+        android:textAllCaps="false"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnHeightHistory" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

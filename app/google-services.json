@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "147118191658",
+    "firebase_url": "https://mypet-ed789-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mypet-ed789",
+    "storage_bucket": "mypet-ed789.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147118191658:android:adc8a79fa0a8308d0dff53",
+        "android_client_info": {
+          "package_name": "com.example.mypet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbEMq3YAjtc-vVFED4klgdNaWYUWkmhQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

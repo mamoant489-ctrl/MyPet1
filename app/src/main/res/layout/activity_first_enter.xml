@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4c7ab"
+    tools:context=".FirstEnter">
+
+    <ImageView
+        android:id="@+id/paw1"
+        android:layout_width="460dp"
+        android:layout_height="255dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:srcCompat="@drawable/paw"
+        app:tint="#8B4C2E" />
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:gravity="center"
+        android:shadowColor="#40000000"
+        android:shadowDx="0"
+        android:shadowDy="10"
+        android:shadowRadius="6"
+        android:text="Добро пожаловать\nв MyPet"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="Всё о питомце в одном месте"
+        android:textColor="#5B3A2A"
+        android:textSize="25sp"
+        android:shadowDx="0"
+        android:shadowDy="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <Button
+        android:id="@+id/btnCreateProfile"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="260dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:onClick="GoToProfile"
+        android:text="Создать Профиль"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="19sp"
+        app:backgroundTint="#8B4C2E"
+        app:cornerRadius="15dp"
+        app:icon="@drawable/arrow_next"
+        app:iconGravity="textEnd"
+        app:iconPadding="20dp"
+        app:iconTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

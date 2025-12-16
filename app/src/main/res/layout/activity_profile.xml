@@ -58,7 +58,7 @@
             android:hint="Возраст" />
     </LinearLayout>
 
-    <!-- Порода -->
+
 
     <TextView
         android:id="@+id/Breed"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="@+id/Breed"
         app:layout_constraintTop_toBottomOf="@id/layoutNameAge" />
 
-    <!-- Рождение -->
+
     <TextView
         android:id="@+id/BirthData"
         android:layout_width="380dp"
@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Breed" />
 
-    <!-- Пол -->
+
     <EditText
         android:id="@+id/etBirthDate"
         android:layout_width="192dp"
@@ -136,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="@+id/BirthData"
         app:layout_constraintTop_toBottomOf="@id/BirthData" />
 
-    <!-- Клеймо -->
+
     <TextView
         android:id="@+id/Mark"
         android:layout_width="380dp"
@@ -160,7 +160,7 @@
         app:layout_constraintEnd_toEndOf="@+id/Mark"
         app:layout_constraintTop_toTopOf="@+id/Mark" />
 
-    <!-- Вес (текущий) -->
+
     <TextView
         android:id="@+id/Weight"
         android:layout_width="380dp"
@@ -184,7 +184,7 @@
         app:layout_constraintEnd_toEndOf="@+id/Weight"
         app:layout_constraintTop_toTopOf="@+id/Weight" />
 
-    <!-- Кнопка история веса -->
+
     <Button
         android:id="@+id/btnWeightHistory"
         android:layout_width="370dp"
@@ -200,7 +200,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Weight" />
 
-    <!-- Рост (текущий) -->
+
     <TextView
         android:id="@+id/Height"
         android:layout_width="380dp"
@@ -224,7 +224,7 @@
         app:layout_constraintEnd_toEndOf="@+id/Height"
         app:layout_constraintTop_toTopOf="@+id/Height" />
 
-    <!-- Кнопка история роста -->
+
     <Button
         android:id="@+id/btnHeightHistory"
         android:layout_width="370dp"
@@ -240,7 +240,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Height" />
 
-    <!-- Кнопка добавить параметр -->
+
     <Button
         android:id="@+id/btnAddParam"
         android:layout_width="380dp"
@@ -259,7 +259,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnHeightHistory" />
 
 
-    <!-- Календарь -->
+
     <ImageButton
         android:id="@+id/dataBtn"
         android:layout_width="25dp"
@@ -282,5 +282,15 @@
         app:srcCompat="@drawable/back_btn1"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp" />
+    <Button
+        android:id="@+id/btnSavePet"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:text="Сохранить питомца"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/btnAddParam"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

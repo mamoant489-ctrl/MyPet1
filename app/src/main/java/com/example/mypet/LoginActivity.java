@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
@@ -29,32 +28,35 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         binding.loginBtn.setOnClickListener(v -> {
-            if (binding.emailEt.getText().toString().isEmpty() || binding.passwordEt.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+            String email = binding.emailEt.getText().toString().trim();
+            String password = binding.passwordEt.getText().toString().trim();
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(getApplicationContext(),
+                        "Fields cannot be empty", Toast.LENGTH_SHORT).show();
             } else {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                        binding.emailEt.getText().toString(),
-                        binding.passwordEt.getText().toString()
-                ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        }
-                    }
-                });
+                FirebaseAuth.getInstance()
+                        .signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+
+                                startActivity(new Intent(LoginActivity.this, FirstEnter.class));
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this,
+                                        "Auth error: " + task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
+
 
         binding.goToRegisterActivityTv.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
             startActivity(intent);
         });
-        binding.loginBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), FirstEnter.class);
-            startActivity(intent);
-        });
     }
-
 }

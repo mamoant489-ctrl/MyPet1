@@ -14,13 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPet">
         <activity
-            android:name=".Profile"
+            android:name=".BasicMenu"
+            android:exported="false" />
+        <activity
+            android:name=".FirstEnter"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

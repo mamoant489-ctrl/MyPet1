@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(userInfo);
 
-                                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                        startActivity(new Intent(RegisterActivity.this, FirstEnter.class));
                                     }
                                 }
                             });
@@ -65,6 +65,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }
             }
+
+
         });
     }
+
+    public void GoToLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 }

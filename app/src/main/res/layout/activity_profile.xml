@@ -8,41 +8,63 @@
     android:background="#FAD9C6"
     tools:context=".Profile">
 
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:padding="16dp"
+        android:padding="5dp"
         android:text="Профиль"
         android:textColor="#000000"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <ImageView
-        android:id="@+id/imgAvatar"
-        android:layout_width="94dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:src="@drawable/avatar"
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="119dp"
+        android:layout_height="118dp"
+        android:src="@drawable/usericon"
         app:layout_constraintEnd_toStartOf="@id/layoutNameAge"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="4dp"
+        android:gravity="center"
+        android:src="@drawable/usercercule"
+        app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfile"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/ivProfile"
+        app:layout_constraintTop_toTopOf="@+id/ivProfile"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/btnAddPhoto"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="4dp"
+        android:background="@color/brown"
+        android:src="@drawable/add_a_photo"
+        app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfile" />
+
     <LinearLayout
         android:id="@+id/layoutNameAge"
-        android:layout_width="285dp"
+        android:layout_width="260dp"
         android:layout_height="106dp"
         android:background="#E3BCA3"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imgAvatar"
+        app:layout_constraintStart_toEndOf="@id/ivProfile"
         app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
         <EditText
@@ -58,13 +80,24 @@
             android:hint="Возраст" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/paramsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHeightHistory">
+
+    </LinearLayout>
 
 
     <TextView
         android:id="@+id/Breed"
         android:layout_width="380dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:background="#E3BCA3"
         android:text="Порода:"
         android:textSize="18sp"
@@ -73,16 +106,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutNameAge" />
 
+
     <EditText
         android:id="@+id/etBreed"
         android:layout_width="307dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:hint="введите"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="@+id/Breed"
         app:layout_constraintTop_toBottomOf="@id/layoutNameAge" />
-
 
     <TextView
         android:id="@+id/BirthData"
@@ -224,7 +257,6 @@
         app:layout_constraintEnd_toEndOf="@+id/Height"
         app:layout_constraintTop_toTopOf="@+id/Height" />
 
-
     <Button
         android:id="@+id/btnHeightHistory"
         android:layout_width="370dp"
@@ -245,7 +277,7 @@
         android:id="@+id/btnAddParam"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="7dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/light_brown"
         android:text="Добавить параметр"
@@ -255,10 +287,10 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnHeightHistory" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/paramsContainer"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/dataBtn"
@@ -275,22 +307,38 @@
         app:srcCompat="@drawable/calendar" />
 
     <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="28dp"
         android:background="?attr/selectableItemBackground"
         android:onClick="GoToMenu"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_btn1"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
-    <Button
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="15dp" />
+
+    <ImageButton
         android:id="@+id/btnSavePet"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="35dp"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/done_outline"
         android:text="Сохранить питомца"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@id/btnAddParam"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="24dp"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/more_vert" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

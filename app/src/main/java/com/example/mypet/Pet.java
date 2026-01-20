@@ -9,9 +9,8 @@ public class Pet {
     public String mark;
     public String weight;
     public String height;
-
-    public Pet() {}
-
+    public Pet() {
+    }
     public Pet(String name, String age, String breed, String birthDate,
                String sex, String mark, String weight, String height) {
         this.name = name;

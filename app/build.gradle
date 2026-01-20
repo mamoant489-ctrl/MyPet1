@@ -52,4 +52,6 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics
+
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
 }

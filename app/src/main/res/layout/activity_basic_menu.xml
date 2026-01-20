@@ -1,317 +1,381 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#F8D1B2">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Главное Меню"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#3A1F0F"
-        android:gravity="center"
-        android:paddingTop="24dp"
-        android:paddingBottom="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:minHeight="1400dp">
 
-    <ImageView
-        android:id="@+id/paw"
-        android:layout_width="470dp"
-        android:layout_height="277dp"
-        app:srcCompat="@drawable/paw"
-        app:tint="#8B4C2E"
-        tools:layout_editor_absoluteX="-30dp"
-        tools:layout_editor_absoluteY="-27dp"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/paw1"
-        android:layout_width="470dp"
-        android:layout_height="277dp"
-        app:srcCompat="@drawable/paw"
-        app:tint="#8B4C2E"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-29dp"
-        tools:layout_editor_absoluteY="490dp" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardPhisicDynamic"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="75dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="207dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp"
+            android:text="Главное Меню"
+            android:textColor="#3A1F0F"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/phisical" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCommands"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardProfileHeader"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Динамика\nДанных"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardEating"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="223dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/comands" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Выученные\nКоманды"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/eating" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardEating"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardCommands"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Питание"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardRemaining"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="223dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/eating" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Питание"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/remaining" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRemaining"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cardEating"
+            app:layout_constraintTop_toBottomOf="@+id/cardPhisicDynamic"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Напоминания"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardAchivments"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="371dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/remaining" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Напоминания"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/achivments" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAchivments"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardEating"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Достижения"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardCommands"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="75dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/achivments" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Достижения"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/comands" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardWalking"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cardAchivments"
+            app:layout_constraintTop_toBottomOf="@+id/cardRemaining"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Выученные\nКоманды"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTracker"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="519dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/walking" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Поиск выгула"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/tracker" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTracker"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardAchivments"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Трекер прогулок"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardMood"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="519dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/tracker" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Трекер прогулок"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/mood" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMood"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="4dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cardTracker"
+            app:layout_constraintTop_toBottomOf="@+id/cardWalking"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Настроение дня"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardWalking"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="371dp">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/mood" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D4A284"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Настроение дня"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/walking" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardPhisicDynamic"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/cardCommands"
+            app:layout_constraintTop_toBottomOf="@+id/cardProfileHeader"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D4A284"
                 android:gravity="center"
-                android:text="Поиск выгула"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/phisical" />
+
+                <TextView
+                    android:layout_width="163dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/brown"
+                    android:gravity="center"
+                    android:text="Динамика\nДанных"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardProfileHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D4A284"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/ivPetAvatar"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/usericon"
+                    app:civ_border_color="@color/brown"
+                    app:civ_border_width="3dp" />
+
+                <EditText
+                    android:id="@+id/tvPetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Кличка питомца"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:textColor="#3A1F0F"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

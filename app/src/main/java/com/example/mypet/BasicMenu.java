@@ -20,7 +20,6 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class BasicMenu extends AppCompatActivity {
 
-    // UI элементы
     private CardView cardProfileHeader, cardCommands, cardEating, cardStats, cardReminders;
     private CardView cardAchievements, cardWalkSearch, cardWalkTracker, cardMood;
     private CircularImageView ivPetAvatar;

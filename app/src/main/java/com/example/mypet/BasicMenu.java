@@ -63,35 +63,37 @@ public class BasicMenu extends AppCompatActivity {
             finish();
             return;
         }
-        petsRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid()).child("pets");
+        // ✅ Исправлено: "Users" (заглавная) + путь pets
+        petsRef = FirebaseDatabase.getInstance()
+                .getReference("Users").child(currentUser.getUid()).child("pets");
     }
 
     private void loadPetProfile() {
+        // ✅ НОВАЯ структура Firebase!
+        petsRef = FirebaseDatabase.getInstance()
+                .getReference("Users")  // ✅ Заглавная "U"!
+                .child(currentUser.getUid())
+                .child("pets");
+
         petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getChildrenCount() > 0) {
-
                     DataSnapshot petSnapshot = snapshot.getChildren().iterator().next();
                     currentPetId = petSnapshot.getKey();
 
 
-                    DataSnapshot profileSnapshot = petSnapshot.child("profile");
-                    if (profileSnapshot.exists()) {
-                        String nickname = profileSnapshot.child("nickname").getValue(String.class);
-                        String photoUrl = profileSnapshot.child("photoUrl").getValue(String.class);
+                    String name = petSnapshot.child("name").getValue(String.class);
+                    String photoUrl = petSnapshot.child("photoUrl").getValue(String.class);
 
+                    tvPetName.setText(name != null ? name : "Кличка питомца");
 
-                        tvPetName.setText(nickname != null ? nickname : "Кличка питомца");
-
-
-                        if (photoUrl != null) {
-                            Glide.with(BasicMenu.this)
-                                    .load(photoUrl)
-                                    .placeholder(R.drawable.usericon)  // Иконка по умолчанию
-                                    .circleCrop()
-                                    .into(ivPetAvatar);
-                        }
+                    if (photoUrl != null && ivPetAvatar != null) {
+                        Glide.with(BasicMenu.this)
+                                .load(photoUrl)
+                                .placeholder(R.drawable.usericon)
+                                .circleCrop()
+                                .into(ivPetAvatar);
                     }
                 } else {
                     tvPetName.setText("Создайте профиль питомца");
@@ -100,10 +102,11 @@ public class BasicMenu extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(BasicMenu.this, "Ошибка загрузки: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BasicMenu.this, "Ошибка: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     private void setupAllClickListeners() {
 

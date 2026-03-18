@@ -154,8 +154,8 @@ public class TrackerActivity extends AppCompatActivity {
         totalDistance = 0;
         chronometer.setBase(SystemClock.elapsedRealtime() - pauseTime);
         chronometer.start();
-        btnToggle.setText("⏸ Пауза");
-        tvStatus.setText("✅ Идёт запись...");
+        btnToggle.setText("Пауза");
+        tvStatus.setText("Идёт запись...");
         tvStatus.setTextColor(Color.GREEN);
         tvDistance.setText("0.0 км");
 
@@ -168,8 +168,8 @@ public class TrackerActivity extends AppCompatActivity {
         isTracking = false;
         pauseTime = SystemClock.elapsedRealtime() - chronometer.getBase();
         chronometer.stop();
-        btnToggle.setText("▶️ Продолжить");
-        tvStatus.setText("⏸ На паузе");
+        btnToggle.setText("Продолжить");
+        tvStatus.setText("На паузе");
         tvStatus.setTextColor(Color.parseColor("#FF9800"));
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
@@ -210,7 +210,7 @@ public class TrackerActivity extends AppCompatActivity {
 
     private void saveWalk() {
         if (totalDistance < 50) {
-            Toast.makeText(this, "❌ Слишком короткая прогулка!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Слишком короткая прогулка", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -222,7 +222,7 @@ public class TrackerActivity extends AppCompatActivity {
 
         Walk walk = new Walk(walkId, date, time, distanceStr, pathPoints);
         walksRef.child(walkId).setValue(walk).addOnSuccessListener(unused -> {
-            Toast.makeText(this, "✅ Прогулка сохранена!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Прогулка сохранена!", Toast.LENGTH_LONG).show();
             pathPoints.clear();
             totalDistance = 0;
             pauseTracking();
@@ -244,7 +244,7 @@ public class TrackerActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1001 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "✅ GPS разрешения получены", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "GPS разрешения получены", Toast.LENGTH_SHORT).show();
         }
     }
 

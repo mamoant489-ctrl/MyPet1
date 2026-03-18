@@ -10,12 +10,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +23,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,9 +45,9 @@ import java.util.Map;
 
 public class PetProfileActivity extends AppCompatActivity {
 
-    // Views
+
     private EditText etNickname, etBreed, etChip, etAge;
-    private Spinner spGender;
+    private AutoCompleteTextView spGender;
     private ImageView ivProfilePhoto, ivAddParam;
     private LinearLayout llCustomParams;
     private TextView tvBirthDate;
@@ -57,7 +55,7 @@ public class PetProfileActivity extends AppCompatActivity {
     private ImageButton btnBack;
 
 
-    private DatabaseReference profileRef;
+    private DatabaseReference petRef;
     private String userId, petId;
     private Uri selectedPhotoUri;
 
@@ -98,21 +96,20 @@ public class PetProfileActivity extends AppCompatActivity {
 
     private void initPetAndProfile() {
         DatabaseReference petsRef = FirebaseDatabase.getInstance()
-                .getReference("users").child(userId).child("pets");
+                .getReference("Users").child(userId).child("pets");
 
         petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getChildrenCount() == 0) {
                     petId = petsRef.push().getKey();
-                    profileRef = petsRef.child(petId).child("profile");
                     Toast.makeText(PetProfileActivity.this, "Создан новый питомец", Toast.LENGTH_SHORT).show();
                 } else {
                     petId = snapshot.getChildren().iterator().next().getKey();
-                    profileRef = petsRef.child(petId).child("profile");
                 }
 
                 isPetIdReady = true;
+                petRef = petsRef.child(petId);
                 initViews();
                 loadProfile();
                 setupListeners();
@@ -120,7 +117,7 @@ public class PetProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(PetProfileActivity.this, "Ошибка: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(PetProfileActivity.this, "❌ " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -139,10 +136,19 @@ public class PetProfileActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBackToMenu);
 
 
-        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
-                R.array.genders, android.R.layout.simple_spinner_item);
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        int brownColor = getResources().getColor(R.color.brown, getTheme());
+        etNickname.setTextColor(brownColor);
+        etBreed.setTextColor(brownColor);
+        etChip.setTextColor(brownColor);
+        etAge.setTextColor(brownColor);
+        tvBirthDate.setTextColor(brownColor);
+        spGender.setTextColor(brownColor);
+
+
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(
+                this, R.array.genders, android.R.layout.simple_dropdown_item_1line);
         spGender.setAdapter(genderAdapter);
+        spGender.setThreshold(1);
     }
 
     private void setupListeners() {
@@ -158,7 +164,9 @@ public class PetProfileActivity extends AppCompatActivity {
 
         tvBirthDate.setOnClickListener(v -> showDatePicker());
 
+
         ivAddParam.setOnClickListener(v -> showAddCustomParamDialog());
+
 
         btnSave.setOnClickListener(v -> saveProfileAndGoToMenu());
     }
@@ -169,6 +177,7 @@ public class PetProfileActivity extends AppCompatActivity {
             cal.set(year, month, day);
             String dateStr = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(cal.getTime());
             tvBirthDate.setText(dateStr);
+            tvBirthDate.setTextColor(getResources().getColor(R.color.brown, getTheme()));
             updateAge(dateStr);
         }, cal.get(Calendar.YEAR) - 1, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -182,6 +191,7 @@ public class PetProfileActivity extends AppCompatActivity {
                 int years = (int) (ageInMonths / 12);
                 int months = (int) (ageInMonths % 12);
                 etAge.setText(years + " г " + months + " м");
+                etAge.setTextColor(getResources().getColor(R.color.brown, getTheme()));
             }
         } catch (Exception e) {
             etAge.setText("");
@@ -226,49 +236,32 @@ public class PetProfileActivity extends AppCompatActivity {
     }
 
     private void loadProfile() {
-        profileRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        petRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
                     if (data != null) {
-                        etNickname.setText((String) data.get("nickname"));
+
+                        etNickname.setText((String) data.get("name"));
                         etBreed.setText((String) data.get("breed"));
-                        etChip.setText((String) data.get("chip"));
+                        etChip.setText((String) data.get("mark"));
                         tvBirthDate.setText((String) data.get("birthDate"));
                         etAge.setText((String) data.get("age"));
 
 
-                        String gender = (String) data.get("gender");
-                        if (gender != null) {
-                            ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) spGender.getAdapter();
-                            for (int i = 0; i < adapter.getCount(); i++) {
-                                if (adapter.getItem(i).toString().equals(gender)) {
-                                    spGender.setSelection(i);
-                                    break;
-                                }
-                            }
+                        String sex = (String) data.get("sex");
+                        if (sex != null) {
+                            spGender.setText(sex, false);
                         }
 
 
                         String photoUrl = (String) data.get("photoUrl");
-                        if (photoUrl != null) {
+                        if (photoUrl != null && ivProfilePhoto != null) {
                             Glide.with(PetProfileActivity.this)
                                     .load(photoUrl)
                                     .placeholder(R.drawable.usericon)
                                     .into(ivProfilePhoto);
-                        }
-
-
-                        customParams.clear();
-                        llCustomParams.removeAllViews();
-                        @SuppressWarnings("unchecked")
-                        List<Map<String, String>> params = (List<Map<String, String>>) data.get("customParams");
-                        if (params != null) {
-                            for (Map<String, String> param : params) {
-                                customParams.add(param);
-                                addCustomParamView(param.get("key"), param.get("value"));
-                            }
                         }
                     }
                 }
@@ -281,32 +274,30 @@ public class PetProfileActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void saveProfileAndGoToMenu() {
-        if (!isPetIdReady) {
+        if (!isPetIdReady || petRef == null) {
             Toast.makeText(this, "Загрузка данных питомца...", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Map<String, Object> profileData = new HashMap<>();
-        profileData.put("nickname", etNickname.getText().toString().trim());
-        profileData.put("breed", etBreed.getText().toString().trim());
-        profileData.put("gender", spGender.getSelectedItem().toString());
-        profileData.put("chip", etChip.getText().toString().trim());
-        profileData.put("birthDate", tvBirthDate.getText().toString());
-        profileData.put("age", etAge.getText().toString());
-        profileData.put("customParams", customParams);
+        Map<String, Object> petData = new HashMap<>();
+        petData.put("name", etNickname.getText().toString().trim());
+        petData.put("breed", etBreed.getText().toString().trim());
+        petData.put("sex", spGender.getText().toString().trim());
+        petData.put("mark", etChip.getText().toString().trim());
+        petData.put("birthDate", tvBirthDate.getText().toString());
+        petData.put("age", etAge.getText().toString());
+        petData.put("customParams", customParams);
 
         if (selectedPhotoUri != null) {
-            uploadPhotoAndSave(profileData);
+            uploadPhotoAndSave(petData);
         } else {
-            saveToFirebase(profileData);
+            saveToFirebase(petData);
         }
     }
 
-    private void saveToFirebase(Map<String, Object> profileData) {
-        profileRef.setValue(profileData).addOnSuccessListener(aVoid -> {
+    private void saveToFirebase(Map<String, Object> petData) {
+        petRef.setValue(petData).addOnSuccessListener(aVoid -> {
             Toast.makeText(this, "Профиль сохранён", Toast.LENGTH_SHORT).show();
             goToBasicMenu();
         }).addOnFailureListener(e -> {
@@ -314,26 +305,24 @@ public class PetProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void uploadPhotoAndSave(Map<String, Object> profileData) {
+    private void uploadPhotoAndSave(Map<String, Object> petData) {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference()
                 .child("users/" + userId + "/pets/" + petId + "/profile.jpg");
 
         storageRef.putFile(selectedPhotoUri).addOnSuccessListener(taskSnapshot -> {
             storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                profileData.put("photoUrl", uri.toString());
-                saveToFirebase(profileData);
+                petData.put("photoUrl", uri.toString());
+                saveToFirebase(petData);
             });
         }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Ошибка загрузки фото: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            saveToFirebase(profileData);
+            Toast.makeText(this, "Ошибка фото: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            saveToFirebase(petData);
         });
     }
 
     private void goToBasicMenu() {
-
         Intent intent = new Intent(PetProfileActivity.this, BasicMenu.class);
         startActivity(intent);
         finish();
     }
-
 }

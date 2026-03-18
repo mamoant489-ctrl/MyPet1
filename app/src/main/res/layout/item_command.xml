@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,21 +11,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="72dp"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="16dp"
+        android:background="#FFF3E8">
 
-        <!-- Иконка команды -->
+        <!-- Иконка -->
         <ImageView
-            android:id="@+id/icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="16dp"
+            android:id="@+id/ivIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
             android:background="#D4A284"
             android:contentDescription="Иконка"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_info_details" />
 
-        <!-- Основная информация -->
+        <!-- Информация (ФИКСИРОВАННАЯ!) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,47 +35,66 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/commandName"
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Название команды"
+                android:text="Сидеть"
                 android:textColor="#3A1F0F"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:singleLine="true" />
+
 
             <TextView
-                android:id="@+id/learnDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Дата изучения: --"
-                android:textColor="#8B4513"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/level"
+                android:id="@+id/tvDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Статус: не установлен"
-                android:textColor="#666666"
-                android:textSize="14sp" />
+                android:text="Добавлена: 18.03.2026"
+                android:textColor="#8B4513"
+                android:textSize="13sp" />
+
         </LinearLayout>
 
         <!-- Статус -->
         <TextView
-            android:id="@+id/statusIndicator"
+            android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="#E0E0E0"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp"
-            android:text="Новая"
-            android:textColor="#666666"
-            android:textSize="12sp" />
+            android:layout_marginEnd="12dp"
+            android:minWidth="72dp"
+            android:padding="8dp"
+            android:text="➕ Новая"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- Edit -->
+        <ImageView
+            android:id="@+id/ivEdit"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Изменить"
+            android:src="@android:drawable/ic_menu_edit"
+            android:tint="#8B4513" />
+
+        <!-- Delete -->
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Удалить"
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="#FF5722" />
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>

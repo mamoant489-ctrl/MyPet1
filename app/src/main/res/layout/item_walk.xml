@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -17,10 +18,10 @@
             android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:text="01.01.2026"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,9 +41,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2.5 км"
+                android:textColor="#4CAF50"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#4CAF50" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -52,8 +53,8 @@
             android:layout_height="32dp"
             android:layout_gravity="end"
             android:layout_marginTop="8dp"
-            android:src="@android:drawable/ic_menu_delete"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_delete" />
 
     </LinearLayout>
 

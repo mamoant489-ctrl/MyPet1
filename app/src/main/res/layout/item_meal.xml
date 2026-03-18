@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#EFE7E7"
         android:orientation="horizontal"
         android:padding="14dp">
 
@@ -20,9 +21,9 @@
             android:layout_height="44dp"
             android:layout_marginEnd="12dp"
             android:background="#D4A284"
+            android:contentDescription="Тип записи"
             android:padding="10dp"
-            android:src="@android:drawable/ic_menu_compass"
-            android:contentDescription="Тип записи" />
+            android:src="@android:drawable/ic_menu_compass" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -69,22 +70,23 @@
             android:id="@+id/ivDelete"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="6dp"
-            android:src="@android:drawable/ic_menu_delete"
             android:contentDescription="Удалить"
-            android:layout_gravity="center_vertical" />
+            android:tint="#FF5722"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_delete" />
 
         <ImageView
             android:id="@+id/ivEdit"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="6dp"
-            android:src="@android:drawable/ic_menu_edit"
             android:contentDescription="Редактировать"
-            android:layout_gravity="center_vertical" />
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_edit" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

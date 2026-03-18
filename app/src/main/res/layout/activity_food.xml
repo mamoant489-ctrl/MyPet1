@@ -269,50 +269,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardToday" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMeals"
-            android:layout_width="388dp"
-            android:layout_height="287dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
-            android:nestedScrollingEnabled="true"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="#D4A284" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMeals"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:paddingBottom="80dp"
+            app:layout_constraintBottom_toTopOf="@+id/fabAddMeal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fabAddMeal"
-            app:layout_constraintVertical_bias="0.0"
-            tools:itemCount="0"
+            app:layout_constraintTop_toBottomOf="@+id/tvMealsHeader"
+            tools:itemCount="3"
             tools:listitem="@layout/item_meal" />
+
 
         <TextView
             android:id="@+id/tvEmptyMeals"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:text="Пока нет записей.\nНажмите + чтобы добавить приём пищи или лакомство."
+            android:text="Пока нет записей.\nНажмите + чтобы добавить приём пищи!"
             android:textColor="#8B4513"
             android:textSize="14sp"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvMeals"
-            app:layout_constraintBottom_toTopOf="@+id/rvMeals" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddMeal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_marginTop="5dp"
-            android:contentDescription="Добавить"
-            android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="#D4A284"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMealsHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/rvMeals" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

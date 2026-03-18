@@ -65,6 +65,7 @@
                 android:layout_height="64dp"
                 android:layout_weight="1"
                 android:text="Начать"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:layout_marginEnd="12dp"
                 app:backgroundTint="#4CAF50" />
@@ -75,6 +76,7 @@
                 android:layout_height="64dp"
                 android:layout_weight="1"
                 android:text="Сохранить"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:layout_marginStart="12dp"
                 app:backgroundTint="#D2B48C" />
@@ -87,6 +89,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
             android:text="История прогулок"
+            android:textColor="#FFFFFF"
             android:textSize="14sp"
             app:backgroundTint="#8B4513" />
 

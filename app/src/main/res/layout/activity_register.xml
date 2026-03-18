@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:fontFamily="@font/ubuntu_medium"
-        android:text="Sing up"
+        android:text="Регистрция"
         android:textColor="@color/cardview_dark_background"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="9dp"
             android:fontFamily="@font/ubuntu_medium"
-            android:hint="Username"
+            android:hint="Имя пользователя"
             android:textColor="@color/cardview_dark_background"
             />
 
@@ -126,7 +126,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="9dp"
             android:fontFamily="@font/ubuntu_medium"
-            android:hint="Password"
+            android:hint="Пароль"
             android:inputType="textPassword"
             android:textColor="@color/cardview_dark_background"
             />
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/ubuntu_medium"
-        android:text="Sing up"
+        android:text="Зарегистрироваться"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

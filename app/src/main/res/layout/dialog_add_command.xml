@@ -22,7 +22,7 @@
             android:id="@+id/etCommandName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Название команды (Сидеть, Лежать...)" />
+            android:hint="Название команды" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,13 +45,14 @@
             android:id="@+id/etLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Уровень (опционально)" />
+            android:hint="Статус" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/brown"
         android:text="Добавить"
         android:textSize="16sp" />
 

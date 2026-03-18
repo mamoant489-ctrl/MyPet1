@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:fontFamily="@font/ubuntu_medium"
-        android:text="Login"
+        android:text="Вход"
         android:textColor="@color/cardview_dark_background"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:fontFamily="@font/ubuntu_medium"
-            android:hint="Password"
+            android:hint="Пароль"
             android:inputType="textPassword"
             android:textColor="@color/cardview_dark_background"
             />
@@ -97,7 +97,7 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/ubuntu_medium"
-        android:text="Login"
+        android:text="Вход"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_lin" />
@@ -114,14 +114,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New to here?" />
+            android:text="Впервые здесь?" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/go_to_register_activity_tv"
             android:textColor="@color/blue_link"
-            android:text="Sing up"
+            android:text="Зарегистрируйтесь"
             android:layout_marginStart="7dp" />
 
     </LinearLayout>

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,9 +26,9 @@ public class BasicMenu extends AppCompatActivity {
     private CircularImageView ivPetAvatar;
     private TextView tvPetName;
 
-    // Firebase
     private FirebaseUser currentUser;
     private String currentPetId;
+    private DatabaseReference petsRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,10 @@ public class BasicMenu extends AppCompatActivity {
         initViews();
         initFirebase();
         setupAllClickListeners();
-        loadPetProfileData();
+        loadPetProfile();
     }
 
     private void initViews() {
-
         cardProfileHeader = findViewById(R.id.cardProfileHeader);
         ivPetAvatar = findViewById(R.id.ivPetAvatar);
         tvPetName = findViewById(R.id.tvPetName);
@@ -58,15 +58,64 @@ public class BasicMenu extends AppCompatActivity {
 
     private void initFirebase() {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, "Не авторизованы", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        petsRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid()).child("pets");
     }
 
+    private void loadPetProfile() {
+        petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getChildrenCount() > 0) {
+
+                    DataSnapshot petSnapshot = snapshot.getChildren().iterator().next();
+                    currentPetId = petSnapshot.getKey();
+
+
+                    DataSnapshot profileSnapshot = petSnapshot.child("profile");
+                    if (profileSnapshot.exists()) {
+                        String nickname = profileSnapshot.child("nickname").getValue(String.class);
+                        String photoUrl = profileSnapshot.child("photoUrl").getValue(String.class);
+
+
+                        tvPetName.setText(nickname != null ? nickname : "Кличка питомца");
+
+
+                        if (photoUrl != null) {
+                            Glide.with(BasicMenu.this)
+                                    .load(photoUrl)
+                                    .placeholder(R.drawable.usericon)  // Иконка по умолчанию
+                                    .circleCrop()
+                                    .into(ivPetAvatar);
+                        }
+                    }
+                } else {
+                    tvPetName.setText("Создайте профиль питомца");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(BasicMenu.this, "Ошибка загрузки: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void setupAllClickListeners() {
 
-        cardProfileHeader.setOnClickListener(v -> startActivity(new Intent(this, Profile.class)));
+        cardProfileHeader.setOnClickListener(v -> {
+            Intent intent = new Intent(BasicMenu.this, PetProfileActivity.class);
+            intent.putExtra("petId", currentPetId);
+            startActivity(intent);
+        });
+
         cardCommands.setOnClickListener(v -> startActivity(new Intent(this, CommandsActivity.class)));
         cardEating.setOnClickListener(v -> startActivity(new Intent(this, FoodActivity.class)));
-        cardStats.setOnClickListener(v -> startActivity(new Intent(this, PhisicDynamicActivity.class)));
+        cardStats.setOnClickListener(v -> startActivity(new Intent(this, DynamicsActivity.class)));
         cardReminders.setOnClickListener(v -> startActivity(new Intent(this, RemainingActivity.class)));
         cardAchievements.setOnClickListener(v -> startActivity(new Intent(this, AchievementsActivity.class)));
         cardWalkSearch.setOnClickListener(v -> startActivity(new Intent(this, WalkingActivity.class)));
@@ -74,49 +123,9 @@ public class BasicMenu extends AppCompatActivity {
         cardMood.setOnClickListener(v -> startActivity(new Intent(this, MoodActivity.class)));
     }
 
-    private void loadPetProfileData() {
-        if (currentUser == null) {
-            tvPetName.setText("Авторизуйтесь");
-            return;
-        }
-
-        String uid = currentUser.getUid();
-        DatabaseReference petsRef = FirebaseDatabase.getInstance()
-                .getReference("Users")
-                .child(uid)
-                .child("pets")
-                .orderByKey()
-                .limitToLast(1).getRef();
-
-        petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot child : snapshot.getChildren()) {
-                        currentPetId = child.getKey();
-                        Pet pet = child.getValue(Pet.class);
-
-                        if (pet != null) {
-                            tvPetName.setText(pet.name != null ? pet.name + " " : "Без имени");
-                        }
-                        break;
-                    }
-                } else {
-                    tvPetName.setText("Создайте профиль");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                tvPetName.setText("Ошибка загрузки");
-                Toast.makeText(BasicMenu.this, "❌ " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        loadPetProfileData();
+        loadPetProfile();
     }
 }

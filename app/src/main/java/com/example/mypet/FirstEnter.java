@@ -17,7 +17,7 @@ public class FirstEnter extends AppCompatActivity {
         setContentView(R.layout.activity_first_enter);
     }
     public void GoToProfile(View view) {
-        Intent intent = new Intent(this, Profile.class);
+        Intent intent = new Intent(this, PetProfileActivity.class);
         startActivity(intent);
     }
 

@@ -21,7 +21,7 @@
             android:background="#D4A284"
             android:gravity="center"
             android:padding="24dp"
-            android:text="📋 Выученные команды"
+            android:text="Выученные команды"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -137,28 +137,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statsLayout" />
 
-
        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="16dp"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fabAdd"
-            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_command" />
 
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="24dp"
             android:background="?attr/selectableItemBackground"
             android:onClick="GoToMenu"
             app:layout_constraintStart_toStartOf="parent"

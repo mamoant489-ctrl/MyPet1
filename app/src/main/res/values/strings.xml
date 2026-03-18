@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyPet</string>
+    <string-array name="genders">
+        <item>Самец</item>
+        <item>Самка</item>
+        <item>Неизвестно</item>
+    </string-array>
 </resources>

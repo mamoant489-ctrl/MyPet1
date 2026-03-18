@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8D1B2"
     android:fillViewport="true"
-    android:background="#F8D1B2">
+    android:onClick="GoToProfile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="1400dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="207dp"
             android:layout_height="72dp"
-            android:layout_marginStart="116dp"
+
+            android:layout_marginStart="80dp"
             android:layout_marginTop="4dp"
             android:gravity="center"
             android:paddingTop="24dp"
-            android:paddingBottom="16dp"
             android:text="Главное Меню"
             android:textColor="#3A1F0F"
             android:textSize="30sp"
@@ -33,7 +32,7 @@
             android:id="@+id/cardCommands"
             android:layout_width="190dp"
             android:layout_height="180dp"
-            android:layout_marginStart="16dp"
+
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
@@ -69,7 +68,7 @@
             android:id="@+id/cardEating"
             android:layout_width="190dp"
             android:layout_height="180dp"
-            android:layout_marginStart="16dp"
+
             android:layout_marginTop="8dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
@@ -107,11 +106,12 @@
             android:layout_width="190dp"
             android:layout_height="180dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/cardEating"
             app:layout_constraintTop_toBottomOf="@+id/cardPhisicDynamic"
             tools:ignore="MissingConstraints">
@@ -144,7 +144,7 @@
             android:id="@+id/cardAchivments"
             android:layout_width="190dp"
             android:layout_height="180dp"
-            android:layout_marginStart="16dp"
+
             android:layout_marginTop="8dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
@@ -182,11 +182,12 @@
             android:layout_width="190dp"
             android:layout_height="180dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/cardAchivments"
             app:layout_constraintTop_toBottomOf="@+id/cardRemaining"
             tools:ignore="MissingConstraints">
@@ -219,7 +220,7 @@
             android:id="@+id/cardTracker"
             android:layout_width="190dp"
             android:layout_height="180dp"
-            android:layout_marginStart="16dp"
+
             android:layout_marginTop="4dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
@@ -257,11 +258,12 @@
             android:layout_width="190dp"
             android:layout_height="180dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/cardTracker"
             app:layout_constraintTop_toBottomOf="@+id/cardWalking"
             tools:ignore="MissingConstraints">
@@ -294,12 +296,11 @@
             android:id="@+id/cardPhisicDynamic"
             android:layout_width="190dp"
             android:layout_height="180dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-
             app:layout_constraintStart_toEndOf="@+id/cardCommands"
             app:layout_constraintTop_toBottomOf="@+id/cardProfileHeader"
             tools:ignore="MissingConstraints">
@@ -335,6 +336,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -342,11 +347,9 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:background="#D4A284"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="20dp">
@@ -360,16 +363,18 @@
                     app:civ_border_color="@color/brown"
                     app:civ_border_width="3dp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/tvPetName"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:gravity="center_vertical"
                     android:hint="Кличка питомца"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:textColor="#3A1F0F"
-                    android:textSize="25sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

@@ -6,4 +6,11 @@
     <color name="blue_link">#468AF2</color>
     <color name="brown">#895A3D</color>
     <color name="light_brown">#E3BCA3</color>
+
+    <color name="mood_active">#6EC5FF</color>
+    <color name="mood_playful">#8DE37D</color>
+    <color name="mood_sad">#9E9E9E</color>
+    <color name="mood_lazy">#FFD166</color>
+    <color name="mood_calm">#C7B8EA</color>
+    <color name="mood_changeable">#FF8FAB</color>
 </resources>

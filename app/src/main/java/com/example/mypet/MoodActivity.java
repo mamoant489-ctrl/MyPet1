@@ -1,253 +1,188 @@
 package com.example.mypet;
 
-import android.content.Context;
-import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.MenuItem;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 public class MoodActivity extends AppCompatActivity {
 
-    private ViewPager2 viewPager;
-    private MoodPagerAdapter adapter;
-    private List<MoodMonth> months;
+    private MaterialCalendarView calendarView;
+
     private DatabaseReference moodRef;
-    private String userId, petId;
-    private Map<String, String> moodData = new HashMap<>();
-
-
-    private final int[] MOOD_COLORS = {
-            Color.RED,
-            Color.YELLOW,
-            Color.GRAY,
-            Color.rgb(139,69,19),
-            Color.rgb(138,43,226),
-            Color.CYAN
-    };
-    private final String[] MOOD_NAMES = {
-            "Активный", "Игривый", "Грустный", "Вялый", "Спокойный", "Переменчивое"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
 
-        initFirebase();
-        setupViewPager();
-        loadMoodData();
-        setupLegend();
-    }
+        calendarView = findViewById(R.id.calendarView);
 
-    private void initFirebase() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            finish();
-            return;
-        }
-        userId = user.getUid();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        DatabaseReference petsRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("pets");
-        petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getChildrenCount() == 0) {
-                    petId = petsRef.push().getKey();
-                } else {
-                    petId = snapshot.getChildren().iterator().next().getKey();
-                }
-                moodRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("pets").child(petId).child("mood");
-            }
+        moodRef = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("users")
+                .child(uid)
+                .child("pets")
+                .child("mood");
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+        loadMoods();
+
+        calendarView.setOnDateChangedListener((widget, date, selected) -> {
+            showMoodMenu(date);
         });
     }
 
-    private void setupViewPager() {
-        viewPager = findViewById(R.id.viewPager);
-        months = generateMonths(6);  // 6 месяцев
-        adapter = new MoodPagerAdapter(months, this);
-        viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(1);
+    private void showMoodMenu(CalendarDay date){
+
+        PopupMenu popupMenu = new PopupMenu(this, calendarView);
+
+        popupMenu.getMenu().add("Активный");
+        popupMenu.getMenu().add("Игривый");
+        popupMenu.getMenu().add("Грустный");
+        popupMenu.getMenu().add("Вялый");
+        popupMenu.getMenu().add("Спокойный");
+        popupMenu.getMenu().add("Переменчивое");
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+
+            String mood = item.getTitle().toString();
+
+            int color = getMoodColor(mood);
+
+            calendarView.addDecorator(
+                    new MoodDecorator(date, color)
+            );
+
+            saveMood(date, mood, color);
+
+            return true;
+        });
+
+        popupMenu.show();
     }
 
-    private List<MoodMonth> generateMonths(int count) {
-        List<MoodMonth> monthsList = new ArrayList<>();
-        Calendar cal = Calendar.getInstance();
-        for (int i = 0; i < count; i++) {
-            monthsList.add(new MoodMonth(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)));
-            cal.add(Calendar.MONTH, -1);
+    private int getMoodColor(String mood){
+
+        switch (mood){
+
+            case "Активный":
+                return 0xFF6EC5FF;
+
+            case "Игривый":
+                return 0xFF8DE37D;
+
+            case "Грустный":
+                return 0xFFBDBDBD;
+
+            case "Вялый":
+                return 0xFFFFD166;
+
+            case "Спокойный":
+                return 0xFFC7B8EA;
+
+            case "Переменчивое":
+                return 0xFFFF8FAB;
         }
-        return monthsList;
+
+        return 0xFFFFFFFF;
     }
 
-    private void loadMoodData() {
-        moodRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                moodData.clear();
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    moodData.put(child.getKey(), child.getValue(String.class));
-                }
-                adapter.notifyDataSetChanged();
-            }
+    private void saveMood(CalendarDay date,
+                          String mood,
+                          int color){
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+        String key = createKey(date);
+
+        moodRef.child(key).child("mood").setValue(mood);
+
+        moodRef.child(key).child("color").setValue(color);
+    }
+
+    private void loadMoods(){
+
+        moodRef.get().addOnCompleteListener(task -> {
+
+            if(task.isSuccessful()){
+
+                DataSnapshot snapshot = task.getResult();
+
+                for(DataSnapshot data : snapshot.getChildren()){
+
+                    String key = data.getKey();
+
+                    Long colorLong =
+                            data.child("color").getValue(Long.class);
+
+                    if(key == null || colorLong == null)
+                        continue;
+
+                    int color = colorLong.intValue();
+
+                    String[] parts = key.split("-");
+
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    CalendarDay date =
+                            CalendarDay.from(year, month, day);
+
+                    calendarView.addDecorator(
+                            new MoodDecorator(date, color)
+                    );
+                }
+            }
         });
     }
 
-    private void setupLegend() {
-        LinearLayout legend = findViewById(R.id.legendLayout);
-        for (int i = 0; i < MOOD_COLORS.length; i++) {
-            View colorView = new View(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(40, 40);
-            params.setMargins(8, 0, 8, 0);
-            colorView.setLayoutParams(params);
-            colorView.setBackgroundColor(MOOD_COLORS[i]);
+    private String createKey(CalendarDay date){
 
-            TextView textView = new TextView(this);
-            textView.setText(MOOD_NAMES[i]);
-            textView.setTextColor(Color.BLACK);
-            textView.setTextSize(12);
-
-            LinearLayout row = new LinearLayout(this);
-            row.addView(colorView);
-            row.addView(textView);
-            legend.addView(row);
-        }
+        return date.getYear() + "-"
+                + date.getMonth() + "-"
+                + date.getDay();
     }
 
-    public void saveMood(int year, int month, int day, int moodIndex) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, day);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String dateKey = sdf.format(cal.getTime());
+    public static class MoodDecorator
+            implements DayViewDecorator {
 
-        if (moodIndex >= 0) {
-            moodData.put(dateKey, MOOD_NAMES[moodIndex]);
-            moodRef.child(dateKey).setValue(MOOD_NAMES[moodIndex]);
-        } else {
-            moodData.remove(dateKey);
-            moodRef.child(dateKey).removeValue();
-        }
-        adapter.notifyDataSetChanged();
-    }
+        private final CalendarDay day;
+        private final int color;
 
-    public String getMoodColor(int year, int month, int day) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, day);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String dateKey = sdf.format(cal.getTime());
-        String mood = moodData.get(dateKey);
-        for (int i = 0; i < MOOD_NAMES.length; i++) {
-            if (MOOD_NAMES[i].equals(mood)) {
-                return String.valueOf(MOOD_COLORS[i]);
-            }
-        }
-        return null;
-    }
+        public MoodDecorator(CalendarDay day,
+                             int color){
 
-    public int[] getMoodColors() { return MOOD_COLORS; }
-    public String[] getMoodNames() { return MOOD_NAMES; }
-}
-
-
-class MoodPagerAdapter extends RecyclerView.Adapter<MoodPagerAdapter.ViewHolder> {
-    private List<MoodMonth> months;
-    private MoodActivity activity;
-
-    MoodPagerAdapter(List<MoodMonth> months, MoodActivity activity) {
-        this.months = months;
-        this.activity = activity;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mood_month, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MoodMonth month = months.get(position);
-        holder.tvMonthName.setText(getMonthName(month.month));
-        holder.tvYear.setText(String.valueOf(month.year));
-
-        // Заполняем дни
-        holder.dayGrid.removeAllViews();
-        Calendar cal = Calendar.getInstance();
-        cal.set(month.year, month.month, 1);
-        int firstDay = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-
-        for (int i = 0; i < firstDay; i++) {
-            holder.dayGrid.addView(new View(activity));
+            this.day = day;
+            this.color = color;
         }
 
+        @Override
+        public boolean shouldDecorate(
+                CalendarDay calendarDay) {
 
-        for (int day = 1; day <= daysInMonth; day++) {
-            MoodDayView dayView = new MoodDayView(activity, month.year, month.month, day);
-            holder.dayGrid.addView(dayView);
+            return calendarDay.equals(day);
         }
-    }
 
-    @Override
-    public int getItemCount() { return months.size(); }
+        @Override
+        public void decorate(
+                @NonNull DayViewFacade view) {
 
-    private String getMonthName(int month) {
-        String[] monthNames = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
-        return monthNames[month];
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvMonthName, tvYear;
-        LinearLayout dayGrid;
-
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvMonthName = itemView.findViewById(R.id.tvMonthName);
-            tvYear = itemView.findViewById(R.id.tvYear);
-            dayGrid = itemView.findViewById(R.id.dayGrid);
+            view.setBackgroundDrawable(
+                    new ColorDrawable(color)
+            );
         }
-    }
-}
-
-class MoodMonth {
-    int year, month;
-    MoodMonth(int year, int month) {
-        this.year = year;
-        this.month = month;
     }
 }

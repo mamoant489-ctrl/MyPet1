@@ -7,7 +7,7 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -27,61 +28,63 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPet">
         <activity
-            android:name=".HeightDynamicsActivity"
+            android:name=".ui.HeightActivity"
             android:exported="false" />
         <activity
-            android:name=".WeightDynamicsActivity"
+            android:name=".ui.WeightActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".notifications.ReminderReceiver"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.HeightDynamicsActivity"
             android:exported="false" />
         <activity
-            android:name=".DynamicsActivity"
+            android:name=".ui.WeightDynamicsActivity"
             android:exported="false" />
         <activity
-            android:name=".WalkHistoryActivity"
+            android:name=".ui.DynamicsActivity"
             android:exported="false" />
         <activity
-            android:name=".PetProfileActivity"
+            android:name=".ui.WalkHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".MoodActivity"
+            android:name=".ui.PetProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".TrackerActivity"
+            android:name=".ui.MoodActivity"
             android:exported="false" />
         <activity
-            android:name=".WalkingActivity"
+            android:name=".ui.TrackerActivity"
             android:exported="false" />
         <activity
-            android:name=".AchievementsActivity"
+            android:name=".ui.WalkingActivity"
             android:exported="false" />
         <activity
-            android:name=".RemainingActivity"
+            android:name=".ui.AchievementsActivity"
             android:exported="false" />
         <activity
-            android:name=".PhisicDynamicActivity"
+            android:name=".ui.ReminderActivity"
             android:exported="false" />
         <activity
-            android:name=".FoodActivity"
+            android:name=".ui.FoodActivity"
             android:exported="false" />
         <activity
-            android:name=".CommandsActivity"
+            android:name=".ui.CommandsActivity"
             android:exported="false" />
         <activity
-            android:name=".BasicMenu"
+            android:name=".ui.BasicMenu"
             android:exported="false" />
         <activity
-            android:name=".FirstEnter"
+            android:name=".ui.FirstEnter"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -22,7 +22,7 @@
             android:background="#D2B48C"
             android:textColor="#FFF" />
 
-        <com.example.mypet.LineChartView
+        <com.example.mypet.views.LineChartView
             android:id="@+id/chartWeightDetail"
             android:layout_width="match_parent"
             android:layout_height="250dp"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f4c7ab"
-    tools:context=".FirstEnter">
+    tools:context=".ui.FirstEnter">
 
     <ImageView
         android:id="@+id/paw1"

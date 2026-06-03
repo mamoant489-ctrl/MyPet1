@@ -35,7 +35,7 @@ public class GroupedMealsAdapter extends RecyclerView.Adapter<GroupedMealsAdapte
 
 
         holder.tvTitle.setText(meal.getTitle());
-        holder.tvSubtitle.setText(meal.getSubtitle());
+        holder.tvSubtitle.setText(meal.getComment());
         holder.tvAmount.setText(meal.getAmount());
 
 

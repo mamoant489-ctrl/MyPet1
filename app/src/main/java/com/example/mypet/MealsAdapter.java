@@ -53,7 +53,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
 
         void bind(Meal meal) {
             tvMealTitle.setText(meal.getTitle());
-            tvMealSubtitle.setText(meal.getSubtitle());
+            tvMealSubtitle.setText(meal.getComment());
             tvMealAmount.setText(meal.getAmount());
 
             // Иконка по типу

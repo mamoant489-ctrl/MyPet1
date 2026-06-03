@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
     app:cardCornerRadius="18dp"
     app:cardElevation="4dp">
 
@@ -12,8 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EFE7E7"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="14dp">
+
+        <!-- Иконка -->
 
         <ImageView
             android:id="@+id/ivType"
@@ -25,68 +29,75 @@
             android:padding="10dp"
             android:src="@android:drawable/ic_menu_compass" />
 
+        <!-- Текст -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- ПУСТО при создании записи это заполнит код -->
             <TextView
                 android:id="@+id/tvMealTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="—"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Корм Royal Canin"
                 android:textColor="#3A1F0F"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvMealSubtitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="—"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="12.05.2026 18:42"
                 android:textColor="#8B4513"
                 android:textSize="13sp" />
+
         </LinearLayout>
+
+        <!-- Количество -->
 
         <TextView
             android:id="@+id/tvMealAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="—"
+            android:layout_marginStart="10dp"
+            android:text="120 г"
             android:textColor="#3A1F0F"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+        <!-- Удалить -->
 
         <ImageView
             android:id="@+id/ivDelete"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Удалить"
-            android:tint="#FF5722"
             android:padding="6dp"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="#FF5722" />
+
+        <!-- Редактировать -->
 
         <ImageView
             android:id="@+id/ivEdit"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Редактировать"
             android:padding="6dp"
             android:src="@android:drawable/ic_menu_edit" />
+
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

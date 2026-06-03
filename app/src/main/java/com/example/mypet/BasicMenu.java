@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
+import com.example.mypet.ui.AchievementsActivity;
+import com.example.mypet.ui.DynamicsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,7 +53,6 @@ public class BasicMenu extends AppCompatActivity {
         cardStats = findViewById(R.id.cardPhisicDynamic);
         cardReminders = findViewById(R.id.cardRemaining);
         cardAchievements = findViewById(R.id.cardAchivments);
-        cardWalkSearch = findViewById(R.id.cardWalking);
         cardWalkTracker = findViewById(R.id.cardTracker);
         cardMood = findViewById(R.id.cardMood);
     }
@@ -63,15 +64,15 @@ public class BasicMenu extends AppCompatActivity {
             finish();
             return;
         }
-        // ✅ Исправлено: "Users" (заглавная) + путь pets
+
         petsRef = FirebaseDatabase.getInstance()
                 .getReference("Users").child(currentUser.getUid()).child("pets");
     }
 
     private void loadPetProfile() {
-        // ✅ НОВАЯ структура Firebase!
+
         petsRef = FirebaseDatabase.getInstance()
-                .getReference("Users")  // ✅ Заглавная "U"!
+                .getReference("Users")
                 .child(currentUser.getUid())
                 .child("pets");
 

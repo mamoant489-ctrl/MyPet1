@@ -1,99 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF8E1"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F8D1B2">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Динамика данных"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="24dp" />
-
-    <!-- ВЕС -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="32dp">
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/back_btn1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Динамика"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#3A1F0F"
+            android:layout_marginTop="10dp"/>
+
+        <!-- ВЕС -->
 
         <LinearLayout
+            android:id="@+id/cardWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:background="#FFF3E8"
+            android:padding="16dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:text="Вес"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#3A1F0F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chartWeight"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"/>
 
             <TextView
                 android:id="@+id/tvCurrentWeight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="15.2 кг"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="0 кг"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#3A1F0F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/tvWeightChange"
+                android:id="@+id/tvWeightDiff"
+                android:text="0"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📈 +0.3"
-                android:textSize="18sp" />
-
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <com.example.mypet.LineChartView
-            android:id="@+id/chartWeight"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#FFF5EE"
-            android:layout_marginTop="8dp"
-            android:padding="16dp" />
-
-    </LinearLayout>
-
-    <!-- РОСТ -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <!-- РОСТ -->
 
         <LinearLayout
+            android:id="@+id/cardHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:background="#FFF3E8"
+            android:padding="16dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:text="Рост"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#3A1F0F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chartHeight"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"/>
 
             <TextView
                 android:id="@+id/tvCurrentHeight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="55.0 см"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="0 см"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#3A1F0F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/tvHeightChange"
+                android:id="@+id/tvHeightDiff"
+                android:text="0"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📉 -0.5"
-                android:textSize="18sp" />
-
+                android:layout_height="wrap_content"/>
         </LinearLayout>
-
-        <com.example.mypet.LineChartView
-            android:id="@+id/chartHeight"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#FFF5EE"
-            android:layout_marginTop="8dp"
-            android:padding="16dp" />
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

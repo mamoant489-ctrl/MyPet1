@@ -108,15 +108,7 @@ public class AchievementsActivity extends AppCompatActivity
             return;
         }
 
-
-        achievementsRef =
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .child("Users")
-                        .child(currentUser.getUid())
-                        .child("pets")
-                        .child(currentPetId)
-                        .child("Achievements");
+        loadCurrentPetId();
 
 
         storageRef =
@@ -137,11 +129,76 @@ public class AchievementsActivity extends AppCompatActivity
         rvAchievements.setAdapter(adapter);
 
 
-        loadAchievements();
-
-
         fabAdd.setOnClickListener(v ->
                 showAddDialog());
+    }
+
+    private void loadCurrentPetId() {
+
+        FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Users")
+                .child(currentUser.getUid())
+                .child("pets")
+
+                .orderByKey()
+                .limitToLast(1)
+
+                .addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(
+                                    @NonNull DataSnapshot snapshot) {
+
+                                if (!snapshot.exists()) {
+
+                                    Toast.makeText(
+                                            AchievementsActivity.this,
+                                            "Нет питомцев",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+
+                                    finish();
+                                    return;
+                                }
+
+                                for (DataSnapshot child : snapshot.getChildren()) {
+
+                                    currentPetId = child.getKey();
+                                    break;
+                                }
+
+                                achievementsRef =
+                                        FirebaseDatabase.getInstance()
+                                                .getReference()
+                                                .child("Users")
+                                                .child(currentUser.getUid())
+                                                .child("pets")
+                                                .child(currentPetId)
+                                                .child("Achievements");
+
+                                storageRef =
+                                        FirebaseStorage.getInstance()
+                                                .getReference()
+                                                .child("achievement_photos")
+                                                .child(currentUser.getUid())
+                                                .child(currentPetId);
+
+                                loadAchievements();
+                            }
+
+                            @Override
+                            public void onCancelled(
+                                    @NonNull DatabaseError error) {
+
+                                Toast.makeText(
+                                        AchievementsActivity.this,
+                                        error.getMessage(),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                        });
     }
 
     private void loadAchievements() {

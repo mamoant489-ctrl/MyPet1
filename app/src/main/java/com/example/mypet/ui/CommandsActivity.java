@@ -68,31 +68,61 @@ public class CommandsActivity extends AppCompatActivity implements CommandClickL
     }
 
     private void setupFirebase() {
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         if (currentUser == null) {
             Toast.makeText(this, "Авторизуйтесь", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        FirebaseDatabase.getInstance().getReference(FirebasePaths.USERS)
-                .child("currentPetId")
+        FirebaseDatabase.getInstance()
+                .getReference(FirebasePaths.USERS)
+                .child(currentUser.getUid())
+                .child("pets")
+                .limitToFirst(1)
                 .get()
+
                 .addOnSuccessListener(snapshot -> {
-                    if (snapshot.exists()) {
-                        petId = snapshot.getValue(String.class);
-                        commandsRef = FirebaseDatabase.getInstance()
-                                        .getReference(FirebasePaths.USERS)
-                                        .child(currentUser.getUid())
-                                        .child("pets")
-                                        .child(petId)
-                                        .child("commands");
-                        loadCommands();
-                    } else {
+
+                    if (!snapshot.exists()) {
+
+                        Toast.makeText(
+                                this,
+                                "Питомец не найден",
+                                Toast.LENGTH_SHORT
+                        ).show();
+
                         showEmptyState(true);
+                        return;
                     }
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(this, "Ошибка загрузки питомца", Toast.LENGTH_SHORT).show();
+
+                    for (DataSnapshot petSnapshot : snapshot.getChildren()) {
+
+                        petId = petSnapshot.getKey();
+                        break;
+                    }
+
+                    commandsRef =
+                            FirebaseDatabase.getInstance()
+                                    .getReference(FirebasePaths.USERS)
+                                    .child(currentUser.getUid())
+                                    .child("pets")
+                                    .child(petId)
+                                    .child("commands");
+
+                    loadCommands();
+                })
+
+                .addOnFailureListener(e -> {
+
+                    Toast.makeText(
+                            this,
+                            e.getMessage(),
+                            Toast.LENGTH_SHORT
+                    ).show();
+
                     showEmptyState(true);
                 });
     }

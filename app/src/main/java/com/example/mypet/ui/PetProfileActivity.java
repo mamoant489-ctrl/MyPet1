@@ -122,43 +122,29 @@ public class PetProfileActivity extends AppCompatActivity {
             return;
         }
 
-        DatabaseReference currentPetRef =
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .child("Users")
-                        .child(userId)
-                        .child("currentPetId");
+        petsRef.limitToFirst(1)
+                .get()
+                .addOnSuccessListener(snapshot -> {
 
-        currentPetRef.addListenerForSingleValueEvent(
-                new ValueEventListener() {
+                    if (snapshot.exists()) {
 
-                    @Override
-                    public void onDataChange(
-                            @NonNull DataSnapshot snapshot) {
-
-                        petId =
-                                snapshot.getValue(String.class);
-
-                        if(petId == null){
-
-                            petId = petsRef.push().getKey();
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            petId = child.getKey();
+                            break;
                         }
 
-                        petRef =
-                                petsRef.child(petId);
+                    } else {
 
-                        isPetIdReady = true;
-
-                        initViews();
-                        loadProfile();
-                        setupListeners();
+                        petId = petsRef.push().getKey();
                     }
 
-                    @Override
-                    public void onCancelled(
-                            @NonNull DatabaseError error) {
+                    petRef = petsRef.child(petId);
 
-                    }
+                    isPetIdReady = true;
+
+                    initViews();
+                    loadProfile();
+                    setupListeners();
                 });
     }
 
@@ -341,13 +327,6 @@ public class PetProfileActivity extends AppCompatActivity {
         petRef.setValue(petData)
 
                 .addOnSuccessListener(unused -> {
-
-                    FirebaseDatabase.getInstance()
-                            .getReference()
-                            .child("users")
-                            .child(userId)
-                            .child("currentPetId")
-                            .setValue(petId);
 
                     Toast.makeText(
                             this,

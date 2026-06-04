@@ -61,41 +61,25 @@ public class WeightActivity extends AppCompatActivity
         setupRecycler();
         loadData();
 
-        fabAdd.setOnClickListener(v ->
-                showAddDialog());
-
-        btnBack.setOnClickListener(v ->
-                finish());
+        fabAdd.setOnClickListener(v -> showAddDialog());
+        btnBack.setOnClickListener(v -> finish());
     }
 
     private void initViews() {
 
         chart = findViewById(R.id.chart);
-
-        rvMeasurements =
-                findViewById(R.id.rvMeasurements);
-
-        fabAdd =
-                findViewById(R.id.fabAdd);
-
-        btnBack =
-                findViewById(R.id.btnBack);
+        rvMeasurements = findViewById(R.id.rvMeasurements);
+        fabAdd = findViewById(R.id.fabAdd);
+        btnBack = findViewById(R.id.btnBack);
     }
 
     private void initFirebase() {
 
-        FirebaseUser user =
-                FirebaseAuth.getInstance()
-                        .getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user == null) {
-
-            Toast.makeText(this,
-                    "Пользователь не найден",
-                    Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "Пользователь не найден", Toast.LENGTH_SHORT).show();
             finish();
-
             return;
         }
 
@@ -110,17 +94,8 @@ public class WeightActivity extends AppCompatActivity
 
     private void setupRecycler() {
 
-        adapter =
-                new MeasurementAdapter(
-                        list,
-                        this,
-                        "кг"
-                );
-
-        rvMeasurements.setLayoutManager(
-                new LinearLayoutManager(this)
-        );
-
+        adapter = new MeasurementAdapter(list, this, "кг");
+        rvMeasurements.setLayoutManager(new LinearLayoutManager(this));
         rvMeasurements.setAdapter(adapter);
     }
 

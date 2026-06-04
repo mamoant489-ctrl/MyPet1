@@ -96,7 +96,6 @@ public class BasicMenu extends AppCompatActivity {
 
         tvEmail = findViewById(R.id.tvEmail);
 
-        btnAddPet = findViewById(R.id.btnAddPet);
         btnLogout = findViewById(R.id.btnLogout);
 
         rvPets = findViewById(R.id.rvPets);
@@ -118,45 +117,64 @@ public class BasicMenu extends AppCompatActivity {
 
     private void loadPetProfile() {
 
-        petsRef = FirebaseDatabase.getInstance()
-                .getReference(FirebasePaths.USERS)
+        FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Users")
                 .child(currentUser.getUid())
-                .child("pets");
+                .child("pets")
+                .limitToFirst(1)
 
-        petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getChildrenCount() > 0) {
-                    DataSnapshot petSnapshot = snapshot.getChildren().iterator().next();
-                    currentPetId = petSnapshot.getKey();
+                .addListenerForSingleValueEvent(new ValueEventListener() {
 
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    String name = petSnapshot.child("name").getValue(String.class);
-                    String photoUrl = petSnapshot.child("photoUrl").getValue(String.class);
-                    String age = petSnapshot.child("age").getValue(String.class);
-                    String birthDate = petSnapshot.child("birthDate").getValue(String.class);
+                        if (!snapshot.exists()) {
+                            return;
+                        }
 
-                    tvPetName.setText(name != null ? name : "Кличка питомца");
-                    tvPetAge.setText(age == null ? "-" : age);
-                    tvPetBirth.setText(birthDate == null ? "-" : birthDate);
+                        DataSnapshot pet =
+                                snapshot.getChildren()
+                                        .iterator()
+                                        .next();
 
-                    if (photoUrl != null && ivPetAvatar != null) {
-                        Glide.with(BasicMenu.this)
-                                .load(photoUrl)
-                                .placeholder(R.drawable.usericon)
-                                .circleCrop()
-                                .into(ivPetAvatar);
+                        String name =
+                                pet.child("name")
+                                        .getValue(String.class);
+
+                        String age =
+                                pet.child("age")
+                                        .getValue(String.class);
+
+                        String birthDate =
+                                pet.child("birthDate")
+                                        .getValue(String.class);
+
+                        tvPetName.setText(
+                                name == null
+                                        ? "Питомец"
+                                        : name
+                        );
+
+                        tvPetAge.setText(
+                                age == null
+                                        ? "-"
+                                        : age
+                        );
+
+                        tvPetBirth.setText(
+                                birthDate == null
+                                        ? "-"
+                                        : birthDate
+                        );
                     }
-                } else {
-                    tvPetName.setText("Создайте профиль питомца");
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(BasicMenu.this, "Ошибка: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onCancelled(
+                            @NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
 

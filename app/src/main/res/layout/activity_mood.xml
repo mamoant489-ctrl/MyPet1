@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#EFE7DD">
+    android:background="#F8D1B2">
 
-    <!-- Верхняя панель -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,13 +18,30 @@
         android:paddingEnd="20dp"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/headerLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Настроение питомца"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#3E2F26"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/back_btn1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Настроение дня"
+                android:textColor="#3A1F0F"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +53,6 @@
 
     </LinearLayout>
 
-    <!-- Карточка календаря -->
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -60,7 +75,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- Легенда -->
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -87,8 +101,6 @@
                 android:textColor="#3E2F26"
                 android:layout_marginBottom="12dp"/>
 
-            <!-- Активный -->
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,7 +120,6 @@
                     android:textColor="#3E2F26"/>
             </LinearLayout>
 
-            <!-- Игривый -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -129,7 +140,6 @@
                     android:textColor="#3E2F26"/>
             </LinearLayout>
 
-            <!-- Грустный -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -150,7 +160,6 @@
                     android:textColor="#3E2F26"/>
             </LinearLayout>
 
-            <!-- Вялый -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -171,7 +180,6 @@
                     android:textColor="#3E2F26"/>
             </LinearLayout>
 
-            <!-- Спокойный -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -192,7 +200,6 @@
                     android:textColor="#3E2F26"/>
             </LinearLayout>
 
-            <!-- Переменчивое -->
 
             <LinearLayout
                 android:layout_width="wrap_content"

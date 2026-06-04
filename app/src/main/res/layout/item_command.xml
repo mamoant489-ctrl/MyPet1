@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="6dp">
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,18 +16,7 @@
         android:padding="16dp"
         android:background="#FFF3E8">
 
-        <!-- Иконка -->
-        <ImageView
-            android:id="@+id/ivIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="12dp"
-            android:background="#D4A284"
-            android:contentDescription="Иконка"
-            android:scaleType="centerInside"
-            android:src="@android:drawable/ic_menu_info_details" />
 
-        <!-- Информация (ФИКСИРОВАННАЯ!) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Сидеть"
                 android:textColor="#3A1F0F"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:ellipsize="end"
                 android:singleLine="true" />
@@ -57,7 +46,6 @@
 
         </LinearLayout>
 
-        <!-- Статус -->
         <TextView
             android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
@@ -72,28 +60,26 @@
             android:textStyle="bold"
             android:gravity="center" />
 
-        <!-- Edit -->
         <ImageView
             android:id="@+id/ivEdit"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Изменить"
             android:src="@android:drawable/ic_menu_edit"
-            android:tint="#8B4513" />
+            app:tint="#8B4513" />
 
-        <!-- Delete -->
         <ImageView
             android:id="@+id/ivDelete"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Удалить"
             android:src="@android:drawable/ic_menu_delete"
-            android:tint="#FF5722" />
+            app:tint="#FF5722" />
 
     </LinearLayout>
 

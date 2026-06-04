@@ -8,21 +8,30 @@
     android:background="#F8D1B2"
     android:padding="16dp">
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/back_btn1"/>
-
-    <TextView
-        android:text="Рост"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#3A1F0F"
+    <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/back_btn1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Рост"
+            android:textColor="#3A1F0F"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
@@ -44,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="#D4A284"/>
+        app:backgroundTint="#D4A284"
+        app:tint="#FFFFFF" />
 
 </LinearLayout>

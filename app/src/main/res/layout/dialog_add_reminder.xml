@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="#FFF5EE">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Добавить напоминание"
+        android:textColor="#3A1F0F"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:id="@+id/etReminderTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Название"/>
+        android:hint="Название"
+        android:textColorHint="#3A1F0F"/>
 
     <EditText
         android:id="@+id/etReminderDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="Описание"/>
+        android:hint="Описание"
+        android:textColorHint="#3A1F0F"/>
 
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:textColorHint="#3A1F0F"/>
 
     <EditText
         android:id="@+id/etReminderDate"
@@ -33,7 +47,8 @@
         android:layout_marginTop="10dp"
         android:focusable="false"
         android:clickable="true"
-        android:hint="Выберите дату"/>
+        android:hint="Выберите дату"
+        android:textColorHint="#3A1F0F"/>
 
     <EditText
         android:id="@+id/etReminderTime"
@@ -42,13 +57,16 @@
         android:layout_marginTop="10dp"
         android:focusable="false"
         android:clickable="true"
-        android:hint="Выберите время"/>
+        android:hint="Выберите время"
+        android:textColorHint="#3A1F0F"/>
 
     <Button
         android:id="@+id/btnSaveReminder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Сохранить"
-        android:layout_marginTop="16dp"/>
+        android:layout_height="50dp"
+        android:text="Добавить"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#D4A284" />
 
 </LinearLayout>

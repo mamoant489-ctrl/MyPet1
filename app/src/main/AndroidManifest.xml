@@ -27,22 +27,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPet">
+
+
+        <receiver
+            android:name=".notifications.ReminderReceiver"
+            android:exported="false" />
         <activity
             android:name=".ui.HeightActivity"
             android:exported="false" />
         <activity
             android:name=".ui.WeightActivity"
-            android:exported="false" />
-
-        <receiver
-            android:name=".notifications.ReminderReceiver"
-            android:exported="false" />
-
-        <activity
-            android:name=".ui.HeightDynamicsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.WeightDynamicsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.DynamicsActivity"
@@ -58,9 +52,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.TrackerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.WalkingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.AchievementsActivity"

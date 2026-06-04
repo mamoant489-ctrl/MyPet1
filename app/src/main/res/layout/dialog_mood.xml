@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="#FFF5EE">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Выберите настроение"
-        android:textSize="18sp"
+        android:textColor="#3A1F0F"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="16dp" />
@@ -27,6 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Очистить"
-        android:backgroundTint="#FF9800" />
+        app:backgroundTint="#D4A284" />
 
 </LinearLayout>

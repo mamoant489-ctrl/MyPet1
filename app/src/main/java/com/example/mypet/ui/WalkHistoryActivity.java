@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class WalkHistoryActivity extends AppCompatActivity {
     private List<Walk> walks = new ArrayList<>();
     private DatabaseReference walksRef;
     private String userId, petId;
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class WalkHistoryActivity extends AppCompatActivity {
 
         initFirebase();
         setupRecyclerView();
+        initViews();
+        setupClickListeners();
     }
 
     private void initFirebase() {
@@ -64,6 +68,17 @@ public class WalkHistoryActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
+    }
+
+    private void initViews() {
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void setupClickListeners() {
+
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> finish());
+        }
     }
 
     private void setupRecyclerView() {

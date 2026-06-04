@@ -3,6 +3,7 @@ package com.example.mypet.ui;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 public class MoodActivity extends AppCompatActivity {
 
     private MaterialCalendarView calendarView;
-
+    private ImageButton btnBack;
     private DatabaseReference moodRef;
 
     @Override
@@ -40,10 +41,23 @@ public class MoodActivity extends AppCompatActivity {
                 .child("mood");
 
         loadMoods();
+        initViews();
+        setupClickListeners();
 
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
             showMoodMenu(date);
         });
+    }
+
+    private void initViews() {
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void setupClickListeners() {
+
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> finish());
+        }
     }
 
     private void showMoodMenu(CalendarDay date){

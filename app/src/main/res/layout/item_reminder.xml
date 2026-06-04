@@ -5,8 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="18dp"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="22dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:text="Название"
             android:textColor="#3A1F0F"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tvReminderDesc"
@@ -32,7 +32,7 @@
             android:layout_marginTop="6dp"
             android:text="Описание"
             android:textColor="#8B4513"
-            android:textSize="14sp"/>
+            android:textSize="19sp"/>
 
         <TextView
             android:id="@+id/tvReminderTime"
@@ -62,14 +62,18 @@
                 android:id="@+id/btnDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Выполнено"/>
+                android:text="Выполнено"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#D4A284"/>
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Удалить"/>
+                android:text="Удалить"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#D4A284"/>
         </LinearLayout>
 
     </LinearLayout>

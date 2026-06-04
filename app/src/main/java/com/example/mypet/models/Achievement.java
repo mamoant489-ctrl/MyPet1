@@ -4,16 +4,14 @@ public class Achievement {
 
     private String id;
     private String title;
-    private String imageUrl;
     private String date;
 
     public Achievement() {
     }
 
-    public Achievement(String id, String title, String imageUrl, String date) {
+    public Achievement(String id, String title, String date) {
         this.id = id;
         this.title = title;
-        this.imageUrl = imageUrl;
         this.date = date;
     }
 
@@ -23,10 +21,6 @@ public class Achievement {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public String getDate() {
@@ -39,10 +33,6 @@ public class Achievement {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public void setDate(String date) {

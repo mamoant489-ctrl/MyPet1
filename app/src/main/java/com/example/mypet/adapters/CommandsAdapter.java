@@ -49,7 +49,7 @@ public class CommandsAdapter extends RecyclerView.Adapter<CommandsAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvDate, tvStatus;
-        ImageView ivEdit, ivDelete, ivIcon;
+        ImageView ivEdit, ivDelete;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,20 +58,13 @@ public class CommandsAdapter extends RecyclerView.Adapter<CommandsAdapter.ViewHo
             tvStatus = itemView.findViewById(R.id.tvStatus);
             ivEdit = itemView.findViewById(R.id.ivEdit);
             ivDelete = itemView.findViewById(R.id.ivDelete);
-            ivIcon = itemView.findViewById(R.id.ivIcon);
         }
 
         void bind(Command command) {
-            // ✅ ПОЛНОЕ НАЗВАНИЕ - БЕЗ maxLines!
             tvName.setText(command.getName() != null ? command.getName() : "Без названия");
-
-            // ✅ ДАТА ВСЕГДА ВИДНА
             tvDate.setText("Добавлена: " + (command.getDateAdded() != null ? command.getDateAdded() : "--"));
-
-            // ✅ СТАТУС
             GradientDrawable statusBg = new GradientDrawable();
             statusBg.setCornerRadius(12f);
-
             String status = command.getStatus() != null ? command.getStatus().toLowerCase() : "новая";
             switch (status) {
                 case "выучена":

@@ -82,7 +82,7 @@ public class FoodActivity extends AppCompatActivity implements MealClickListener
         btnSetupFood = findViewById(R.id.btnSetupFood);
         progressDaily = findViewById(R.id.progressDaily);
         fabAddMeal = findViewById(R.id.fabAddMeal);
-        btnBack = findViewById(R.id.imageButton);
+        btnBack = findViewById(R.id.btnBack);
 
 
         tvEatenToday.setText("0");
@@ -124,23 +124,38 @@ public class FoodActivity extends AppCompatActivity implements MealClickListener
 
     private void loadCurrentPetId() {
 
+        String uid = currentUser.getUid();
+
         FirebaseDatabase.getInstance()
-                .getReference(FirebasePaths.USERS)
-                .child(currentUser.getUid())
-                .child("currentPetId")
+                .getReference()
+                .child("Users")
+                .child(uid)
+                .child("pets")
+                .limitToFirst(1)
                 .get()
                 .addOnSuccessListener(snapshot -> {
 
-                    currentPetId = snapshot.getValue(String.class);
-
-                    if (currentPetId == null) {
-                        Toast.makeText(this,
-                                "Питомец не выбран",
-                                Toast.LENGTH_SHORT).show();
+                    if (!snapshot.exists()) {
+                        Toast.makeText(
+                                FoodActivity.this,
+                                "Питомец не найден",
+                                Toast.LENGTH_SHORT
+                        ).show();
                         return;
                     }
 
-                    setupDatabaseReferences();
+                    DataSnapshot petSnapshot =
+                            snapshot.getChildren()
+                                    .iterator()
+                                    .next();
+
+                    currentPetId = petSnapshot.getKey();
+
+                    petRef = petSnapshot.getRef();
+
+                    mealsRef = petRef.child("meals");
+                    foodSettingsRef = petRef.child("foodSettings");
+
                     loadFoodSettings();
                     loadMeals();
                 });

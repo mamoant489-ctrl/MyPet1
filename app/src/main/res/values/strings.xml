@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyPet</string>
+    <string name="app_name">DogBuddy</string>
     <string-array name="genders">
         <item>Самец</item>
         <item>Самка</item>

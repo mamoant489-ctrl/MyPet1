@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    android:layout_margin="4dp">
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="#FFF3E8"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="12dp">
@@ -22,10 +23,12 @@
             android:orientation="vertical">
 
             <TextView
+                android:text="Параметр"
+                android:textColor="#3A1F0F"
                 android:id="@+id/tvKey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -33,7 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textSize="14sp" />
+                android:text="Описание"
+                android:textColor="#8B4513"
+                android:textSize="17sp" />
         </LinearLayout>
 
         <ImageView
@@ -42,7 +47,7 @@
             android:layout_height="32dp"
             android:padding="4dp"
             android:src="@android:drawable/ic_menu_delete"
-            android:tint="#FF5722"
+            app:tint="#FF5722"
             android:background="?attr/selectableItemBackgroundBorderless" />
 
     </LinearLayout>

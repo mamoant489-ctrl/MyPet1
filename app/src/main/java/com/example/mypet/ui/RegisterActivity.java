@@ -133,17 +133,35 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     Log.d(TAG, "Данные сохранены");
 
-                                    Toast.makeText(RegisterActivity.this,
-                                            "Регистрация успешна",
-                                            Toast.LENGTH_SHORT).show();
+                                    auth.getCurrentUser()
+                                            .sendEmailVerification()
+                                            .addOnSuccessListener(unused2 -> {
 
-                                    Intent intent =
-                                            new Intent(RegisterActivity.this,
-                                                    FirstEnter.class);
+                                                Toast.makeText(
+                                                        RegisterActivity.this,
+                                                        "На почту отправлено письмо для подтверждения",
+                                                        Toast.LENGTH_LONG
+                                                ).show();
 
-                                    startActivity(intent);
+                                                FirebaseAuth.getInstance().signOut();
 
-                                    finish();
+                                                startActivity(
+                                                        new Intent(
+                                                                RegisterActivity.this,
+                                                                LoginActivity.class
+                                                        )
+                                                );
+
+                                                finish();
+                                            })
+                                            .addOnFailureListener(e -> {
+
+                                                Toast.makeText(
+                                                        RegisterActivity.this,
+                                                        "Ошибка отправки письма: " + e.getMessage(),
+                                                        Toast.LENGTH_LONG
+                                                ).show();
+                                            });
                                 })
 
                                 .addOnFailureListener(e -> {

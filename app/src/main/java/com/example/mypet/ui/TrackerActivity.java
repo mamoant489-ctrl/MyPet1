@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class TrackerActivity extends AppCompatActivity {
     private Chronometer chronometer;
     private TextView tvDistance, tvStatus;
     private Button btnToggle, btnSave, btnHistory;
+    private ImageButton btnBack;
     private boolean isTracking = false;
     private long pauseTime = 0;
     private double totalDistance = 0;
@@ -120,6 +122,8 @@ public class TrackerActivity extends AppCompatActivity {
         btnToggle.setOnClickListener(v -> toggleTracking());
         btnSave.setOnClickListener(v -> saveWalk());
         btnHistory.setOnClickListener(v -> startActivity(new Intent(this, WalkHistoryActivity.class)));
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
     }
 
 

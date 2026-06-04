@@ -44,8 +44,36 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
 
-                                startActivity(new Intent(LoginActivity.this, FirstEnter.class));
-                                finish();
+                                FirebaseAuth.getInstance()
+                                        .getCurrentUser()
+                                        .reload()
+                                        .addOnSuccessListener(unused -> {
+
+                                            if (FirebaseAuth.getInstance()
+                                                    .getCurrentUser()
+                                                    .isEmailVerified()) {
+
+                                                startActivity(
+                                                        new Intent(
+                                                                LoginActivity.this,
+                                                                FirstEnter.class
+                                                        )
+                                                );
+
+                                                finish();
+
+                                            } else {
+
+                                                FirebaseAuth.getInstance().signOut();
+
+                                                Toast.makeText(
+                                                        LoginActivity.this,
+                                                        "Подтвердите почту через письмо",
+                                                        Toast.LENGTH_LONG
+                                                ).show();
+                                            }
+                                        });
+
                             } else {
                                 Toast.makeText(LoginActivity.this,
                                         "Auth error: " + task.getException().getMessage(),
@@ -54,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });
-
 
         binding.goToRegisterActivityTv.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);

@@ -40,15 +40,6 @@ public class GroupedMealsAdapter extends RecyclerView.Adapter<GroupedMealsAdapte
         holder.tvAmount.setText(meal.getAmount());
 
 
-        if ("еда".equals(meal.getType())) {
-            holder.ivType.setImageResource(android.R.drawable.ic_menu_compass);
-            holder.ivType.setBackgroundColor(0xFFD4A284);
-        } else {
-            holder.ivType.setImageResource(android.R.drawable.ic_menu_info_details);
-            holder.ivType.setBackgroundColor(0xFF90EE90);
-        }
-
-
         holder.ivDelete.setOnClickListener(v -> listener.onDelete(meal));
         holder.ivEdit.setOnClickListener(v -> listener.onEdit(meal));
         holder.itemView.setOnClickListener(v -> listener.onEdit(meal));
@@ -61,12 +52,11 @@ public class GroupedMealsAdapter extends RecyclerView.Adapter<GroupedMealsAdapte
 
 
     static class MealViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivType, ivDelete, ivEdit;
+        ImageView ivDelete, ivEdit;
         TextView tvTitle, tvSubtitle, tvAmount;
 
         public MealViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivType = itemView.findViewById(R.id.ivType);
             tvTitle = itemView.findViewById(R.id.tvMealTitle);
             tvSubtitle = itemView.findViewById(R.id.tvMealSubtitle);
             tvAmount = itemView.findViewById(R.id.tvMealAmount);

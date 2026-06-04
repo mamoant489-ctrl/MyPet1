@@ -12,23 +12,32 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/back_btn1" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/headerLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Динамика"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#3A1F0F"
-            android:layout_marginTop="10dp"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!-- ВЕС -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/back_btn1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Динамика данных"
+                android:textColor="#3A1F0F"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/cardWeight"

@@ -45,7 +45,6 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivType = itemView.findViewById(R.id.ivType);
             tvMealTitle = itemView.findViewById(R.id.tvMealTitle);
             tvMealSubtitle = itemView.findViewById(R.id.tvMealSubtitle);
             tvMealAmount = itemView.findViewById(R.id.tvMealAmount);
@@ -55,13 +54,6 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
             tvMealTitle.setText(meal.getTitle());
             tvMealSubtitle.setText(meal.getSubtitle());
             tvMealAmount.setText(meal.getAmount());
-
-            // Иконка по типу
-            if ("еда".equals(meal.getType())) {
-                ivType.setImageResource(android.R.drawable.ic_menu_compass);
-            } else {
-                ivType.setImageResource(android.R.drawable.ic_menu_info_details);
-            }
         }
     }
 }

@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mypet.R;
 
 class ViewHolder extends RecyclerView.ViewHolder {
-    ImageView ivIcon, ivEdit, ivDelete;
+    ImageView ivEdit, ivDelete;
     TextView tvName, tvDate, tvStatus;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
-        ivIcon = itemView.findViewById(R.id.ivIcon);
         tvName = itemView.findViewById(R.id.tvName);
         tvDate = itemView.findViewById(R.id.tvDate);
         tvStatus = itemView.findViewById(R.id.tvStatus);

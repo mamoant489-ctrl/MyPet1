@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class ReminderActivity extends AppCompatActivity
     private List<Reminder> reminderList = new ArrayList<>();
 
     private DatabaseReference remindersRef;
+
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,20 @@ public class ReminderActivity extends AppCompatActivity
                             Manifest.permission.POST_NOTIFICATIONS
                     },
                     1);
+        }
+
+        initViews();
+        setupClickListeners();
+    }
+
+    private void initViews() {
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void setupClickListeners() {
+
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> finish());
         }
     }
 
@@ -370,10 +387,11 @@ public class ReminderActivity extends AppCompatActivity
                         PendingIntent.FLAG_UPDATE_CURRENT
                                 | PendingIntent.FLAG_IMMUTABLE);
 
-        alarmManager.setExact(
+        alarmManager.set(
                 AlarmManager.RTC_WAKEUP,
                 reminderTime,
-                pendingIntent);
+                pendingIntent
+        );
     }
 
     @Override

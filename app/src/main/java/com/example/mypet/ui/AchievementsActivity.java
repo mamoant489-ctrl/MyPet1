@@ -8,11 +8,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,8 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,33 +46,8 @@ public class AchievementsActivity extends AppCompatActivity
 
     private DatabaseReference achievementsRef;
 
-    private StorageReference storageRef;
-
-    private Uri selectedImageUri;
-
     private String currentPetId;
-
-    private ImageView currentPreview;
-
-    private final ActivityResultLauncher<Intent> imagePickerLauncher =
-            registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    result -> {
-
-                        if (result.getResultCode() == RESULT_OK
-                                && result.getData() != null
-                                && result.getData().getData() != null) {
-
-                            selectedImageUri =
-                                    result.getData().getData();
-
-                            if (currentPreview != null) {
-                                currentPreview.setImageURI(
-                                        selectedImageUri
-                                );
-                            }
-                        }
-                    });
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +79,8 @@ public class AchievementsActivity extends AppCompatActivity
         }
 
         loadCurrentPetId();
-
-
-        storageRef =
-                FirebaseStorage.getInstance()
-                        .getReference()
-                        .child("achievement_photos");
-
+        initViews();
+        setupClickListeners();
 
         adapter = new AchievementAdapter(
                 achievementsList,
@@ -178,13 +143,6 @@ public class AchievementsActivity extends AppCompatActivity
                                                 .child(currentPetId)
                                                 .child("Achievements");
 
-                                storageRef =
-                                        FirebaseStorage.getInstance()
-                                                .getReference()
-                                                .child("achievement_photos")
-                                                .child(currentUser.getUid())
-                                                .child(currentPetId);
-
                                 loadAchievements();
                             }
 
@@ -199,6 +157,17 @@ public class AchievementsActivity extends AppCompatActivity
                                 ).show();
                             }
                         });
+    }
+
+    private void initViews() {
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void setupClickListeners() {
+
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> finish());
+        }
     }
 
     private void loadAchievements() {
@@ -246,84 +215,46 @@ public class AchievementsActivity extends AppCompatActivity
 
     private void showAddDialog() {
 
-        selectedImageUri = null;
-
         android.view.View dialogView =
                 LayoutInflater.from(this)
                         .inflate(R.layout.dialog_achievement, null);
 
-        EditText etTitle = dialogView.findViewById(R.id.etTitle);
-        Button btnPickImage = dialogView.findViewById(R.id.btnPickImage);
-        Button btnSave = dialogView.findViewById(R.id.btnSave);
-        ImageView ivPreview = dialogView.findViewById(R.id.ivPreview);
+        EditText etTitle =
+                dialogView.findViewById(R.id.etTitle);
 
-        currentPreview = ivPreview;
+        Button btnSave =
+                dialogView.findViewById(R.id.btnSave);
 
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(dialogView)
-                .setCancelable(true)
-                .create();
-
-        dialog.setOnDismissListener(d -> {
-            selectedImageUri = null;
-            currentPreview = null;
-        });
-
-        btnPickImage.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            );
-            imagePickerLauncher.launch(intent);
-        });
+        AlertDialog dialog =
+                new AlertDialog.Builder(this)
+                        .setView(dialogView)
+                        .setCancelable(true)
+                        .create();
 
         btnSave.setOnClickListener(v -> {
 
-            String title = etTitle.getText().toString().trim();
+            String title =
+                    etTitle.getText().toString().trim();
 
             if (title.isEmpty()) {
-                Toast.makeText(this, "Введите название", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(
+                        this,
+                        "Введите название",
+                        Toast.LENGTH_SHORT
+                ).show();
+
                 return;
             }
 
-            if (selectedImageUri == null) {
-                Toast.makeText(this, "Выберите фото", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            uploadImage(title, dialog);
+            saveAchievement(title, dialog);
         });
 
         dialog.show();
     }
 
-    private void uploadImage(String title, AlertDialog dialog) {
-
-        if (selectedImageUri == null) {
-            Toast.makeText(this, "Ошибка: изображение не выбрано", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String imageName = System.currentTimeMillis() + ".jpg";
-
-        StorageReference imageRef = storageRef.child(imageName);
-
-        imageRef.putFile(selectedImageUri)
-                .addOnSuccessListener(taskSnapshot ->
-                        imageRef.getDownloadUrl()
-                                .addOnSuccessListener(uri -> {
-                                    saveAchievement(title, uri.toString(), dialog);
-                                })
-                )
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this,
-                            "Upload failed: " + e.getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                });
-    }
 
     private void saveAchievement(String title,
-                                 String imageUrl,
                                  AlertDialog dialog) {
 
         String achievementId =
@@ -339,7 +270,6 @@ public class AchievementsActivity extends AppCompatActivity
                 new Achievement(
                         achievementId,
                         title,
-                        imageUrl,
                         currentDate
                 );
 
@@ -354,8 +284,6 @@ public class AchievementsActivity extends AppCompatActivity
                             "Ачивка добавлена",
                             Toast.LENGTH_SHORT
                     ).show();
-
-                    selectedImageUri = null;
 
                     dialog.dismiss();
                 })

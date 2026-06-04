@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="#FFF3E8"
+    android:background="#FFF5EE"
     android:minWidth="300dp">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Добавить команду"
         android:textColor="#3A1F0F"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="24dp" />
@@ -32,18 +32,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Сидеть, Лежать, Дай лапу..."
-            android:textSize="16sp"
-            android:maxLines="1" />
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnSave"
-        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Добавить команду"
-        android:textSize="16sp"
-        app:backgroundTint="#D4A284"
-        app:cornerRadius="12dp" />
+        android:text="Добавить"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#D4A284" />
 
 </LinearLayout>

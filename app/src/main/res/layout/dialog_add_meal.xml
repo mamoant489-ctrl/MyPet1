@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
+    android:background="#FFF5EE"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -13,6 +13,7 @@
         android:layout_marginBottom="24dp"
         android:gravity="center"
         android:text="Новый приём пищи"
+        android:textColor="#3A1F0F"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -21,13 +22,18 @@
         android:id="@+id/rgMealType"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:textColor="#3A1F0F"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:boxStrokeColor="#D4A284"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="#8B4513">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMealTitle"
@@ -40,7 +46,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:boxStrokeColor="#D4A284"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="#8B4513">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAmount"
@@ -54,7 +64,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="24dp"
+        app:boxStrokeColor="#D4A284"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="#8B4513">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etComment"

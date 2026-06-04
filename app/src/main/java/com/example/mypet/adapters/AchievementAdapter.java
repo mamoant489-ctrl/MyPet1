@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mypet.R;
 import com.example.mypet.models.Achievement;
 
@@ -22,8 +21,8 @@ public class AchievementAdapter
         void onDelete(Achievement achievement);
     }
 
-    private List<Achievement> list;
-    private DeleteListener listener;
+    private final List<Achievement> list;
+    private final DeleteListener listener;
 
     public AchievementAdapter(List<Achievement> list,
                               DeleteListener listener) {
@@ -37,9 +36,11 @@ public class AchievementAdapter
                                          int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_achievement,
+                .inflate(
+                        R.layout.item_achievement,
                         parent,
-                        false);
+                        false
+                );
 
         return new ViewHolder(view);
     }
@@ -53,10 +54,6 @@ public class AchievementAdapter
         holder.tvTitle.setText(achievement.getTitle());
         holder.tvDate.setText(achievement.getDate());
 
-        Glide.with(holder.itemView.getContext())
-                .load(achievement.getImageUrl())
-                .into(holder.ivPhoto);
-
         holder.ivDelete.setOnClickListener(v ->
                 listener.onDelete(achievement));
     }
@@ -68,13 +65,13 @@ public class AchievementAdapter
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivPhoto, ivDelete;
-        TextView tvTitle, tvDate;
+        ImageView ivDelete;
+        TextView tvTitle;
+        TextView tvDate;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivPhoto = itemView.findViewById(R.id.ivPhoto);
             ivDelete = itemView.findViewById(R.id.ivDelete);
 
             tvTitle = itemView.findViewById(R.id.tvAchievementTitle);

@@ -2,21 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
+    android:background="#FFF5EE"
     android:orientation="vertical"
     android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Добавить параметр"
+        android:textColor="#3A1F0F"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
 
     <EditText
         android:id="@+id/etKey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Название параметра" />
+        android:hint="Название параметра"
+        android:textColorHint="#3A1F0F"/>
 
     <EditText
         android:id="@+id/etValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Значение" />
+        android:hint="Значение"
+        android:textColorHint="#3A1F0F"/>
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ public class CommandsActivity extends AppCompatActivity implements CommandClickL
     private List<Command> commandsList = new ArrayList<>();
     private TextView tvTotal, tvMastered, tvLearning, tvEmpty;
     private FloatingActionButton fabAdd;
-
+    private ImageButton btnBack;
     private FirebaseUser currentUser;
     private String petId;
     private DatabaseReference commandsRef;
@@ -53,7 +54,6 @@ public class CommandsActivity extends AppCompatActivity implements CommandClickL
 
         initViews();
         setupFirebase();
-        setupToolbar();
         setupRecyclerView();
         setupClickListeners();
     }
@@ -65,6 +65,8 @@ public class CommandsActivity extends AppCompatActivity implements CommandClickL
         tvLearning = findViewById(R.id.tvLearning);
         tvEmpty = findViewById(R.id.tvEmpty);
         fabAdd = findViewById(R.id.fabAdd);
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
     }
 
     private void setupFirebase() {
@@ -125,15 +127,6 @@ public class CommandsActivity extends AppCompatActivity implements CommandClickL
 
                     showEmptyState(true);
                 });
-    }
-
-    private void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Команды");
-        }
     }
 
     private void setupRecyclerView() {

@@ -4,14 +4,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="#F8D1B2"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="4dp">
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/ivPet"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/usericon"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/av_6"
+        app:civ_border_color="@color/brown"
+        app:civ_border_width="3dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,12 +31,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textColor="#3A1F0F"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/tvAge"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="#3A1F0F"/>
     </LinearLayout>
 
 </LinearLayout>

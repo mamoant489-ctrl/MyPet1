@@ -22,9 +22,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.example.mypet.adapters.AvatarAdapter;
 import com.example.mypet.data.FirebasePaths;
 import com.example.mypet.R;
+import com.example.mypet.models.Avatar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,17 +58,12 @@ public class PetProfileActivity extends AppCompatActivity {
     private TextView tvBirthDate;
     private Button btnSave;
     private ImageButton btnBack;
-
     private ImageView ivProfilePhoto;
     private FloatingActionButton ivAddParam;
-
+    private String selectedAvatar;
     private boolean createNewPet = false;
     private DatabaseReference petRef;
     private String userId, petId;
-    private Uri selectedPhotoUri;
-
-
-    private ActivityResultLauncher<Intent> galleryLauncher;
     private List<Map<String, String>> customParams = new ArrayList<>();
     private boolean isPetIdReady = false;
 
@@ -82,21 +82,7 @@ public class PetProfileActivity extends AppCompatActivity {
 
         createNewPet = getIntent().getBooleanExtra("newPet", false);
 
-        setupGalleryLauncher();
         initPetAndProfile();
-    }
-
-    private void setupGalleryLauncher() {
-        galleryLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        selectedPhotoUri = result.getData().getData();
-                        if (ivProfilePhoto != null) {
-                            ivProfilePhoto.setImageURI(selectedPhotoUri);
-                        }
-                    }
-                });
     }
 
     private void initPetAndProfile() {
@@ -182,10 +168,7 @@ public class PetProfileActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> goToBasicMenu());
 
 
-        ivProfilePhoto.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            galleryLauncher.launch(intent);
-        });
+        ivProfilePhoto.setOnClickListener(v -> showAvatarPicker());
 
 
         tvBirthDate.setOnClickListener(v -> showDatePicker());
@@ -195,6 +178,73 @@ public class PetProfileActivity extends AppCompatActivity {
 
 
         btnSave.setOnClickListener(v -> saveProfileAndGoToMenu());
+    }
+
+    private void showAvatarPicker() {
+
+        View view =
+                LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.dialog_avatar_picker,
+                                null);
+
+        RecyclerView rv =
+                view.findViewById(R.id.rvAvatars);
+
+        ArrayList<Avatar> avatars =
+                new ArrayList<>();
+
+        avatars.add(new Avatar(
+                R.drawable.av_1,
+                "avatar_dog_1"));
+
+        avatars.add(new Avatar(
+                R.drawable.av_2,
+                "avatar_dog_2"));
+
+        avatars.add(new Avatar(
+                R.drawable.av_3,
+                "avatar_dog_3"));
+
+        avatars.add(new Avatar(
+                R.drawable.av_4,
+                "avatar_dog_4"));
+
+        avatars.add(new Avatar(
+                R.drawable.av_5,
+                "avatar_dog_5"));
+
+        avatars.add(new Avatar(
+                R.drawable.av_6,
+                "avatar_dog_6"));
+
+        AlertDialog dialog =
+                new AlertDialog.Builder(this)
+                        .setView(view)
+                        .create();
+
+        rv.setLayoutManager(
+                new LinearLayoutManager(
+                        this,
+                        RecyclerView.HORIZONTAL,
+                        false));
+
+        rv.setAdapter(
+                new AvatarAdapter(
+                        avatars,
+                        avatar -> {
+
+                            selectedAvatar =
+                                    avatar.getAvatarKey();
+
+                            ivProfilePhoto
+                                    .setImageResource(
+                                            avatar.getImageRes());
+
+                            dialog.dismiss();
+                        }));
+
+        dialog.show();
     }
 
     private void showDatePicker() {
@@ -281,6 +331,23 @@ public class PetProfileActivity extends AppCompatActivity {
                             spGender.setText(sex, false);
                         }
 
+                        String avatar = (String) data.get("avatar");
+
+                        if (avatar != null) {
+
+                            selectedAvatar = avatar;
+
+                            int resId = getResources().getIdentifier(
+                                    avatar,
+                                    "drawable",
+                                    getPackageName()
+                            );
+
+                            if (resId != 0) {
+                                ivProfilePhoto.setImageResource(resId);
+                            }
+                        }
+
 
                         String photoUrl = (String) data.get("photoUrl");
                         if (photoUrl != null && ivProfilePhoto != null) {
@@ -343,12 +410,9 @@ public class PetProfileActivity extends AppCompatActivity {
         petData.put("birthDate", tvBirthDate.getText().toString());
         petData.put("age", etAge.getText().toString());
         petData.put("customParams", customParams);
+        petData.put("avatar", selectedAvatar);
 
-        if (selectedPhotoUri != null) {
-            uploadPhotoAndSave(petData);
-        } else {
-            saveToFirebase(petData);
-        }
+        saveToFirebase(petData);
     }
 
     private void saveToFirebase(Map<String,Object> petData) {
@@ -374,21 +438,6 @@ public class PetProfileActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
                 });
-    }
-
-    private void uploadPhotoAndSave(Map<String, Object> petData) {
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference()
-                .child("users/" + userId + "/pets/" + petId + "/profile.jpg");
-
-        storageRef.putFile(selectedPhotoUri).addOnSuccessListener(taskSnapshot -> {
-            storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                petData.put("photoUrl", uri.toString());
-                saveToFirebase(petData);
-            });
-        }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Ошибка фото: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            saveToFirebase(petData);
-        });
     }
 
     private void goToBasicMenu() {

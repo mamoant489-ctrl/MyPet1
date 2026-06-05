@@ -3,18 +3,18 @@ package com.example.mypet.models;
 public class Avatar {
 
     private final int imageRes;
-    private final String name;
+    private final String avatarKey;
 
-    public Avatar(int imageRes, String name) {
+    public Avatar(int imageRes, String avatarKey) {
         this.imageRes = imageRes;
-        this.name = name;
+        this.avatarKey = avatarKey;
     }
 
     public int getImageRes() {
         return imageRes;
     }
 
-    public String getName() {
-        return name;
+    public String getAvatarKey() {
+        return avatarKey;
     }
 }

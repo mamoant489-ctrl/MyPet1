@@ -48,7 +48,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <ImageView
                 android:id="@+id/ivProfilePhoto"
                 android:layout_width="120dp"

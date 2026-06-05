@@ -13,25 +13,25 @@ import com.example.mypet.models.Avatar;
 
 import java.util.List;
 
-public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder> {
+public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.Holder> {
 
-    public interface OnAvatarClickListener {
-        void onAvatarClick(Avatar avatar);
+    public interface OnAvatarClick {
+        void onClick(Avatar avatar);
     }
 
-    private final List<Avatar> avatars;
-    private final OnAvatarClickListener listener;
+    private final List<Avatar> list;
+    private final OnAvatarClick listener;
 
-    public AvatarAdapter(List<Avatar> avatars,
-                         OnAvatarClickListener listener) {
+    public AvatarAdapter(List<Avatar> list,
+                         OnAvatarClick listener) {
 
-        this.avatars = avatars;
+        this.list = list;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(
+    public Holder onCreateViewHolder(
             @NonNull ViewGroup parent,
             int viewType) {
 
@@ -39,42 +39,40 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder
                 .inflate(
                         R.layout.item_avatar,
                         parent,
-                        false
-                );
+                        false);
 
-        return new ViewHolder(view);
+        return new Holder(view);
     }
 
     @Override
     public void onBindViewHolder(
-            @NonNull ViewHolder holder,
+            @NonNull Holder holder,
             int position) {
 
-        Avatar avatar = avatars.get(position);
+        Avatar avatar = list.get(position);
 
-        holder.ivAvatar.setImageResource(
-                avatar.getImageRes()
-        );
+        holder.image.setImageResource(
+                avatar.getImageRes());
 
         holder.itemView.setOnClickListener(v ->
-                listener.onAvatarClick(avatar));
+                listener.onClick(avatar));
     }
 
     @Override
     public int getItemCount() {
-        return avatars.size();
+        return list.size();
     }
 
-    static class ViewHolder
-            extends RecyclerView.ViewHolder {
+    static class Holder extends RecyclerView.ViewHolder {
 
-        ImageView ivAvatar;
+        ImageView image;
 
-        public ViewHolder(@NonNull View itemView) {
+        public Holder(@NonNull View itemView) {
             super(itemView);
 
-            ivAvatar =
-                    itemView.findViewById(R.id.ivAvatar);
+            image =
+                    itemView.findViewById(
+                            R.id.ivAvatar);
         }
     }
 }

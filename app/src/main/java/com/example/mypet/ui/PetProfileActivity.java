@@ -289,6 +289,35 @@ public class PetProfileActivity extends AppCompatActivity {
                                     .placeholder(R.drawable.usericon)
                                     .into(ivProfilePhoto);
                         }
+
+                        Object customParamsObj = data.get("customParams");
+
+                        if (customParamsObj instanceof List<?>) {
+
+                            customParams.clear();
+                            llCustomParams.removeAllViews();
+
+                            List<?> paramsList = (List<?>) customParamsObj;
+
+                            for (Object item : paramsList) {
+
+                                if (item instanceof Map) {
+
+                                    Map<?, ?> map = (Map<?, ?>) item;
+
+                                    String key = String.valueOf(map.get("key"));
+                                    String value = String.valueOf(map.get("value"));
+
+                                    Map<String, String> param = new HashMap<>();
+                                    param.put("key", key);
+                                    param.put("value", value);
+
+                                    customParams.add(param);
+
+                                    addCustomParamView(key, value);
+                                }
+                            }
+                        }
                     }
                 }
             }

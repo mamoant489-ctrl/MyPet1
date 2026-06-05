@@ -68,6 +68,7 @@ public class FoodActivity extends AppCompatActivity implements MealClickListener
         initFirebase();
         setupRecyclerView();
         setupClickListeners();
+        setupDatabaseReferences();
     }
 
     private void initViews() {

@@ -281,7 +281,7 @@ public class AchievementsActivity extends AppCompatActivity
 
                     Toast.makeText(
                             this,
-                            "Ачивка добавлена",
+                            "Достижение добавлено",
                             Toast.LENGTH_SHORT
                     ).show();
 
@@ -308,7 +308,7 @@ public class AchievementsActivity extends AppCompatActivity
 
         new AlertDialog.Builder(this)
 
-                .setTitle("Удалить ачивку?")
+                .setTitle("Удалить достижение?")
 
                 .setMessage(
                         achievement.getTitle()

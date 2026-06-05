@@ -69,15 +69,15 @@ public class CommandsAdapter extends RecyclerView.Adapter<CommandsAdapter.ViewHo
             switch (status) {
                 case "выучена":
                     statusBg.setColor(Color.parseColor("#4CAF50"));
-                    tvStatus.setText("✅ Выучена");
+                    tvStatus.setText("Выучена");
                     break;
                 case "в процессе":
                     statusBg.setColor(Color.parseColor("#FF9800"));
-                    tvStatus.setText("⏳ В процессе");
+                    tvStatus.setText("В процессе");
                     break;
                 default:
                     statusBg.setColor(Color.parseColor("#B0BEC5"));
-                    tvStatus.setText("➕ Новая");
+                    tvStatus.setText("Новая");
                     break;
             }
             tvStatus.setBackground(statusBg);
